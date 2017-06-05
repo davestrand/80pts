@@ -7,10 +7,10 @@
 
 import UIKit
 
+let showText = "THIS IS TEXT"
 
 class ViewController: UIViewController {
     
-    //TEST
     
     
     //VIEW
@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupData()
         beautitfy()
+        persistSelectedEmployee(employee: thisEmployee)
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,8 +69,9 @@ class ViewController: UIViewController {
         longFormat.dateStyle = DateFormatter.Style.medium
         let longDate = longFormat.string(from: bDayOutlet.date)
         let longStrArray = longDate.components(separatedBy:" ")
-        
         thisEmployee.birthday = [Int(shortStrArray[0])!, Int(shortStrArray[1])!, Int(longStrArray[2])! ]
+
+        persistSelectedEmployee(employee: thisEmployee)
     }
     
     
@@ -86,9 +88,20 @@ class ViewController: UIViewController {
 
         thisEmployee.started = [Int(shortStrArray[0])!, Int(shortStrArray[1])!, Int(longStrArray[2])! ]
         thisEmployee.batch = inferBatch(hireDate: dateFromArray(arr: thisEmployee.started))
-        
+
+        persistSelectedEmployee(employee: thisEmployee)
     }
 
+    func persistSelectedEmployee (employee:Person) {
+        
+        let defaults = UserDefaults.standard
+        
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: employee)
+        
+        defaults.set(encodedData, forKey: "currentEmployee")
+        
+        
+    }
     
     func beautitfy() {
         

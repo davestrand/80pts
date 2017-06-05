@@ -58,6 +58,7 @@ func setupData () {
     thisEmployee.points = thisEmployee.age
     thisEmployee.eligible = false
     
+    
 }
 
 func printEmployeeData () {
