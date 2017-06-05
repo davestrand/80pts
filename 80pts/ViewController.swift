@@ -44,6 +44,7 @@ class ViewController: UIViewController {
     
     @IBAction func info(_ sender: Any) {
         popupInfo()
+        locateSelectedEmployee()
     }
     
     @IBAction func caclulateAction(_ sender: Any) {
@@ -94,13 +95,26 @@ class ViewController: UIViewController {
 
     func persistSelectedEmployee (employee:Person) {
         
-        let defaults = UserDefaults.standard
         
         let encodedData = NSKeyedArchiver.archivedData(withRootObject: employee)
         
-        defaults.set(encodedData, forKey: "currentEmployee")
+        UserDefaults.standard.set(encodedData, forKey: "currentEmployee")
         
         
+    }
+    
+    func locateSelectedEmployee () {
+        if let data = UserDefaults.standard.data(forKey: "currentEmployee") {
+            print("okay there is data")
+            
+            if let thisGuy = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
+                print("IN HERE!")
+                print(thisGuy.name)
+            }
+        } else {
+            print("There is an issue")
+        }
+
     }
     
     func beautitfy() {

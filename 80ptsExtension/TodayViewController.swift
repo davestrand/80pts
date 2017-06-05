@@ -17,18 +17,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
-        let defaults = UserDefaults.standard
 
         widgetTimeLabel?.text = "Not yet assigned."
         
-        if let employeeData = defaults.data(forKey: "currentEmployee") {
-
-            let personData:Person = NSKeyedUnarchiver.unarchiveObject(with: employeeData ) as! Person
+        if let data = UserDefaults.standard.data(forKey: "currentEmployee") {
+            print("okay there is data")
             
-            print(personData.age)
-            
+            if let thisGuy = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
+            widgetTimeLabel?.text = thisGuy.name
+            }
+        } else {
+            print("There is an issue")
         }
-
+        
+      
     }
     
     override func didReceiveMemoryWarning() {

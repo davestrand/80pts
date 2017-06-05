@@ -11,10 +11,10 @@
 
 
 
-enum Batch {
-    case first  // Prior to 1/1/1984
-    case second // 1/1/1984 through 6/30/2011
-    case third // 7/1/2011 or later
+enum Batch : Int {
+    case first = 1  // Prior to 1/1/1984
+    case second = 2 // 1/1/1984 through 6/30/2011
+    case third = 3 // 7/1/2011 or later
 }
 
 
@@ -43,7 +43,7 @@ func checkEligibility () {
     }
     
     if thisEmployee.age >= 65 {
-        if thisEmployee.batch == Batch.third {
+        if thisEmployee.batch == Batch.third.rawValue {
             if thisEmployee.yearsWorked >= 10 {
                 thisEmployee.reasonEligible = "Reason: 65 points and at least 10 years."
                 thisEmployee.eligible = true
@@ -61,14 +61,14 @@ func checkEligibility () {
         }
     } else if thisEmployee.age >= 60 {
         if thisEmployee.yearsWorked >= 25 {
-            if thisEmployee.batch == Batch.third {
+            if thisEmployee.batch == Batch.third.rawValue {
                 thisEmployee.reasonEligible = "Reason: 60 points and at least 25 years."
                 thisEmployee.eligible = true
             }
         }
     } else if thisEmployee.age >= 55 {
         if thisEmployee.yearsWorked >= 30 {
-            if thisEmployee.batch == Batch.third {
+            if thisEmployee.batch == Batch.third.rawValue {
                 thisEmployee.reasonEligible = "Reason: 55 points and at least 30 years."
                 thisEmployee.eligible = true
             }

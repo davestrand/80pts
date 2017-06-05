@@ -212,27 +212,29 @@ func calculateRetirement () -> (title: String, body: String)  {
 }
 
 
-func inferBatch (hireDate:Date) -> Batch {
+func inferBatch (hireDate:Date) -> Int {
     
     if hireDate < BatchData.firstBefore {
-        return Batch.first
+        return Batch.first.rawValue
     } else if hireDate < BatchData.secondBefore {
-        return Batch.second
+        return Batch.second.rawValue
     } else {
-        return Batch.third
+        return Batch.third.rawValue
     }
 }
 
 
-func batchText (b:Batch) -> String {
+func batchText (b:Int) -> String {
     
     switch b {
-    case Batch.first:
+    case Batch.first.rawValue:
         return "\(BatchData.firstText)"
-    case Batch.second:
+    case Batch.second.rawValue:
         return "\(BatchData.secondText)"
-    case Batch.third:
+    case Batch.third.rawValue:
         return "\(BatchData.thirdText)"
+    default:
+        return "Batch Unknown"
     }
 }
 
