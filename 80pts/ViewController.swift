@@ -94,24 +94,34 @@ class ViewController: UIViewController {
     }
 
     func persistSelectedEmployee (employee:Person) {
-        
+        //https://grokswift.com/notification-center-widget/
         
         let encodedData = NSKeyedArchiver.archivedData(withRootObject: employee)
         
-        UserDefaults.standard.set(encodedData, forKey: "currentEmployee")
+
+        if let defaultGroup = Defaults.group {
+            
+            defaultGroup.set("Group Save Enabled", forKey: "TEST")
+
+            defaultGroup.set(encodedData, forKey: Key.currentEmployee)
+            print("saved data I think")
+        
+            defaultGroup.synchronize()
+
+        } else {
+            print("DEFAULT GROUP PROBLEM")
+        }
+        
         
         
     }
     
     func locateSelectedEmployee () {
-        if let data = UserDefaults.standard.data(forKey: "currentEmployee") {
-            print("okay there is data")
-            
-            if let thisGuy = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
-                print("IN HERE!")
-                print(thisGuy.name)
-            }
-        } else {
+        
+
+        if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let aPerson = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
+                print("\(aPerson.name) is currently stored in group data as primary person.")
+            } else {
             print("There is an issue")
         }
 

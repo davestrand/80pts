@@ -54,6 +54,8 @@ class Person: NSObject, NSCoding {
     
     required init (coder aDecoder: NSCoder) {
         
+        Person.registerClassName()
+        
         self.name = aDecoder.decodeObject(forKey: "name") as! String
         self.birthday = aDecoder.decodeObject(forKey: "birthday") as! [Int]
         self.started = aDecoder.decodeObject(forKey: "started") as! [Int]
@@ -71,6 +73,9 @@ class Person: NSObject, NSCoding {
     }
     
     func encode(with aCoder: NSCoder) {
+        
+        Person.registerClassName()
+        
         aCoder.encode(name, forKey: "name")
         aCoder.encode(birthday, forKey: "birthday")
         aCoder.encode(started, forKey: "started")
@@ -105,5 +110,11 @@ var thisEmployee = Person(name: "David Levy",
                           reasonEligible: "Not yet eligible."
 )
 
-
+extension NSCoding {
+    static func registerClassName() {
+        let className = NSStringFromClass(self).components(separatedBy: ".").last!
+        NSKeyedArchiver.setClassName(className, for: self)
+        NSKeyedUnarchiver.setClass(self, forClassName: className)
+    }
+}
 

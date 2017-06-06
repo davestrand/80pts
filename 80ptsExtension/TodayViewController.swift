@@ -20,17 +20,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
         widgetTimeLabel?.text = "Not yet assigned."
         
-        if let data = UserDefaults.standard.data(forKey: "currentEmployee") {
-            print("okay there is data")
-            
-            if let thisGuy = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
-            widgetTimeLabel?.text = thisGuy.name
-            }
-        } else {
-            print("There is an issue")
-        }
         
-      
+    
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,6 +35,52 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
+
+        Defaults.group?.synchronize()
+        Person.registerClassName()
+        
+        if let data =  Defaults.group?.data(forKey: Key.currentEmployee) {
+            print("I have found some data \(data)")
+            widgetTimeLabel?.text = "found some data"
+            
+
+            
+            if let aPerson = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
+                widgetTimeLabel?.text = aPerson.name
+
+            } else   {
+                widgetTimeLabel?.text = "found some data but can't make it into a person"
+
+            }
+            
+
+        } else {
+            print("not the data you are looking for")
+            widgetTimeLabel?.text = "Test failed."
+
+        }
+
+        
+//        if let testData = Defaults.group?.string(forKey: "TEST") {
+//            widgetTimeLabel?.text = testData
+//
+//        } else {
+//            widgetTimeLabel?.text = "Test failed."
+//
+//        }
+        
+        //GROUP DATA SAVING BUT THIS DOESN"T WORK YET...
+//        if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let aPerson = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
+//            print("\(aPerson.name) is currently stored in group data as primary person.")
+//            widgetTimeLabel?.text = aPerson.name
+//            
+//        } else {
+//            print("There is a problem loading group data")
+//            widgetTimeLabel?.text = "There was a problem loading profile."
+//            
+//        }
+        
+        
         
         completionHandler(NCUpdateResult.newData)
     }
