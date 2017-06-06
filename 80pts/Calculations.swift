@@ -167,7 +167,7 @@ func getPoints() {
 
 
 
-func calculateRetirement () -> (title: String, body: String)  {
+func calculateRetirement (longForm: Bool) -> (title: String, body: String)  {
     
     checkIfBirthdayBeforeStartDate()
     
@@ -205,8 +205,20 @@ func calculateRetirement () -> (title: String, body: String)  {
         titleText = "Hunker down!"
     }
     
-    let bodyText = ("Eligible to retire after working \(thisEmployee.yearsWorked) years at age \(thisEmployee.age) on \(dateArray.printableString). That is in \(yearsFromToday) years or \(daysFromToday) days from now. If you are still employed, you now have been employed \(yearsFromStartToToday) years. \n\n\(thisEmployee.reasonEligible)"
+
+    var bodyText = ""
+
+    if longForm {
+    
+        
+     bodyText = ("Eligible to retire after working \(thisEmployee.yearsWorked) years at age \(thisEmployee.age) on \(dateArray.printableString). That is in \(yearsFromToday) years or \(daysFromToday) days from now. If you are still employed, you now have been employed \(yearsFromStartToToday) years. \n\n\(thisEmployee.reasonEligible)"
     )
+        
+    } else {
+        
+        bodyText = ("Can retire on \(dateArray.printableString) in \(yearsFromToday) years or \(daysFromToday) days from now.")
+        
+    }
     
     return (titleText,bodyText)
 }

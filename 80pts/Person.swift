@@ -110,6 +110,9 @@ var thisEmployee = Person(name: "David Levy",
                           reasonEligible: "Not yet eligible."
 )
 
+
+//This is added because the extension wasn't properly reading my custom Person class.
+//https://stackoverflow.com/questions/43864708/nskeyedunarchiver-unarchiveobject-fails-with-an-error-when-picking-data-from-use
 extension NSCoding {
     static func registerClassName() {
         let className = NSStringFromClass(self).components(separatedBy: ".").last!

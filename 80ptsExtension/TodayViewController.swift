@@ -11,17 +11,15 @@ import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
-    @IBOutlet var widgetTimeLabel: UILabel?
+    @IBOutlet var titleLabel: UILabel?
+    @IBOutlet var bodyLabel: UILabel?
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view from its nib.
 
-        widgetTimeLabel?.text = "Not yet assigned."
-        
-        
-    
+        Defaults.group?.synchronize()
+        Person.registerClassName()
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,58 +28,34 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        // Perform any setup necessary in order to update the view.
+    
+        var bodyText = ""
+        var titleText = ""
         
-        // If an error is encountered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
-
-        Defaults.group?.synchronize()
-        Person.registerClassName()
-        
-        if let data =  Defaults.group?.data(forKey: Key.currentEmployee) {
-            print("I have found some data \(data)")
-            widgetTimeLabel?.text = "found some data"
+        if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let lastPersonChecked = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
             
-
+            thisEmployee = lastPersonChecked
+            setupData()
             
-            if let aPerson = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
-                widgetTimeLabel?.text = aPerson.name
-
-            } else   {
-                widgetTimeLabel?.text = "found some data but can't make it into a person"
-
+            if oldEnoughToWork() {
+                let answer = calculateRetirement(longForm: false)
+                bodyText = answer.body
+                titleText = answer.title
+            } else {
+                bodyText = "Not old enough to work, keep growing and learning!"
             }
+
+                titleLabel?.text = titleText
+                bodyLabel?.text = bodyText
             
-
         } else {
-            print("not the data you are looking for")
-            widgetTimeLabel?.text = "Test failed."
-
+            
+            bodyLabel?.text = "Oops!  \(NCUpdateResult.noData)"
+            // If an error is encountered, use NCUpdateResult.Failed
+            // If there's no update required, use NCUpdateResult.NoData
+            // If there's an update, use NCUpdateResult.NewData
         }
 
-        
-//        if let testData = Defaults.group?.string(forKey: "TEST") {
-//            widgetTimeLabel?.text = testData
-//
-//        } else {
-//            widgetTimeLabel?.text = "Test failed."
-//
-//        }
-        
-        //GROUP DATA SAVING BUT THIS DOESN"T WORK YET...
-//        if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let aPerson = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
-//            print("\(aPerson.name) is currently stored in group data as primary person.")
-//            widgetTimeLabel?.text = aPerson.name
-//            
-//        } else {
-//            print("There is a problem loading group data")
-//            widgetTimeLabel?.text = "There was a problem loading profile."
-//            
-//        }
-        
-        
-        
         completionHandler(NCUpdateResult.newData)
     }
     

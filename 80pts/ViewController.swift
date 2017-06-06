@@ -7,10 +7,8 @@
 
 import UIKit
 
-let showText = "THIS IS TEXT"
 
 class ViewController: UIViewController {
-    
     
     
     //VIEW
@@ -118,7 +116,6 @@ class ViewController: UIViewController {
     
     func locateSelectedEmployee () {
         
-
         if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let aPerson = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
                 print("\(aPerson.name) is currently stored in group data as primary person.")
             } else {
@@ -148,7 +145,7 @@ class ViewController: UIViewController {
     
     func showCalculatedAnswer() {
         
-        let fancyText = calculateRetirement()
+        let fancyText = calculateRetirement(longForm: true)
         let alert = UIAlertController(title: fancyText.title, message: fancyText.body, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "How Much?", style: UIAlertActionStyle.default) { action in
             self.popUpRates()
