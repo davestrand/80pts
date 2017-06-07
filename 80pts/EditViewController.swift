@@ -8,16 +8,29 @@
 import UIKit
 
 
-class ViewController: UIViewController {
-    
+class EditViewController: UIViewController {
+    @IBOutlet weak var birthdayLabel: UILabel!
+    @IBOutlet weak var birthdayPicker: UIDatePicker!
+    @IBOutlet weak var startDayLabel: UILabel!
+    @IBOutlet weak var startDayPicker: UIDatePicker!
+    @IBOutlet weak var wagesReplacedLabel: UILabel!
+    @IBOutlet weak var wagesReplacedStepper: UIStepper!
+    @IBOutlet weak var nameField: UITextField!
+
+
+
     
     //VIEW
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
         setupData()
         beautitfy()
-        persistSelectedEmployee(employee: thisEmployee)
+        
     }
+    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -27,23 +40,14 @@ class ViewController: UIViewController {
     
     
     //OUTLETS
-    
-    @IBAction func popSite(_ sender: Any) {
-        if let url = NSURL(string: "https://www.azasrs.gov/content/retirement-eligibility"){ UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) }
-    }
-    @IBOutlet weak var bDayOutlet: UIDatePicker!
-    @IBOutlet weak var stDayOutlet: UIDatePicker!
 
     
     
     
     
     //ACTIONS
-    
-    @IBAction func info(_ sender: Any) {
-        popupInfo()
-        locateSelectedEmployee()
-    }
+ 
+
     
     @IBAction func caclulateAction(_ sender: Any) {
         setupData()
@@ -61,12 +65,12 @@ class ViewController: UIViewController {
     @IBAction func bDayAction(_ sender: Any) {
         let shortFormat = DateFormatter()
         shortFormat.dateStyle = DateFormatter.Style.short
-        let strDate = shortFormat.string(from: bDayOutlet.date)
+        let strDate = shortFormat.string(from: birthdayPicker.date)
         let shortStrArray = strDate.components(separatedBy:"/")
         
         let longFormat = DateFormatter()
         longFormat.dateStyle = DateFormatter.Style.medium
-        let longDate = longFormat.string(from: bDayOutlet.date)
+        let longDate = longFormat.string(from: birthdayPicker.date)
         let longStrArray = longDate.components(separatedBy:" ")
         thisEmployee.birthday = [Int(shortStrArray[0])!, Int(shortStrArray[1])!, Int(longStrArray[2])! ]
 
@@ -77,12 +81,12 @@ class ViewController: UIViewController {
     @IBAction func stDayAction(_ sender: Any) {
         let shortFormat = DateFormatter()
         shortFormat.dateStyle = DateFormatter.Style.short
-        let strDate = shortFormat.string(from: stDayOutlet.date)
+        let strDate = shortFormat.string(from: startDayPicker.date)
         let shortStrArray = strDate.components(separatedBy:"/")
         
         let longFormat = DateFormatter()
         longFormat.dateStyle = DateFormatter.Style.medium
-        let longDate = longFormat.string(from: stDayOutlet.date)
+        let longDate = longFormat.string(from: startDayPicker.date)
         let longStrArray = longDate.components(separatedBy:" ")
 
         thisEmployee.started = [Int(shortStrArray[0])!, Int(shortStrArray[1])!, Int(longStrArray[2])! ]
@@ -114,6 +118,8 @@ class ViewController: UIViewController {
         
     }
     
+
+    
     func locateSelectedEmployee () {
         
         if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let aPerson = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
@@ -126,16 +132,16 @@ class ViewController: UIViewController {
     
     func beautitfy() {
         
-        bDayOutlet.backgroundColor = UIColor.white
-        bDayOutlet.setValue(UIColor.black, forKeyPath: "textColor")
-        bDayOutlet.setValue(1.0, forKeyPath: "alpha")
-        bDayOutlet.setDate( dateFromArray(arr: thisEmployee.birthday), animated: true)
+        birthdayPicker.backgroundColor = UIColor.white
+        birthdayPicker.setValue(UIColor.black, forKeyPath: "textColor")
+        birthdayPicker.setValue(1.0, forKeyPath: "alpha")
+        birthdayPicker.setDate( dateFromArray(arr: thisEmployee.birthday), animated: true)
         
-        stDayOutlet.backgroundColor = UIColor.white
-        stDayOutlet.setValue(UIColor.black, forKeyPath: "textColor")
-        stDayOutlet.setValue(1.0, forKeyPath: "alpha")
-        stDayOutlet.setDate( dateFromArray(arr: thisEmployee.started), animated: true)
-        stDayOutlet.maximumDate = dateFromArray(arr: dateArray.today)
+        startDayPicker.backgroundColor = UIColor.white
+        startDayPicker.setValue(UIColor.black, forKeyPath: "textColor")
+        startDayPicker.setValue(1.0, forKeyPath: "alpha")
+        startDayPicker.setDate( dateFromArray(arr: thisEmployee.started), animated: true)
+        startDayPicker.maximumDate = dateFromArray(arr: dateArray.today)
         
         UIApplication.shared.statusBarStyle = .default
 
@@ -170,21 +176,42 @@ class ViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func popupInfo() {
-        
-        var version = ""
-        
-        if let v = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            version = v
-        }
-        
-        
-        let alert = UIAlertController(title: "80 Points V\(version)", message: "An app by David Levy to calculate Arizona State Retirement eligibility based on the information provided on the official ASRS website. THIS IS NOT AN OFFICIAL ASRS TOOL, and any calculations or estimations provided here should be verified with your Human Resources department and official resources. ", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-
+    
 
 
 }
+
+extension EditViewController: UITextFieldDelegate {
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("TextField did begin editing method called")
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("TextField did end editing method called")
+    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        print("TextField should begin editing method called")
+        return true 
+    }
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        print("TextField should clear method called")
+        return true 
+    }
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("TextField should snd editing method called")
+        return true 
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print("While entering the characters this method gets called")
+        return true 
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("TextField should return method called, \(textField.text ?? "nah")")
+        thisEmployee.name = "\(textField.text ?? "Unnamed")"
+        nameField.resignFirstResponder()
+        return true
+    }
+
+}
+
 

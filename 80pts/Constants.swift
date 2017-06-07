@@ -18,5 +18,6 @@ class Defaults {
 class Key {
     
     static let currentEmployee = "CurrentEmployee"
+    static let people = "People"
     
 }

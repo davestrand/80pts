@@ -96,7 +96,6 @@ class Person: NSObject, NSCoding {
 }
 
 
-
 var thisEmployee = Person(name: "David Levy",
                           birthday: [10,20,1974],
                           started: [1,5,2005],
