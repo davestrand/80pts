@@ -188,21 +188,21 @@ func calculateRetirement (longForm: Bool) -> (title: String, body: String)  {
     var titleText = "Calculated!"
     
     if daysFromToday <= 0 {
-        titleText = "Congratulations! You are eligible!"
+        titleText = "Congratulations \(thisEmployee.name)! You are eligible!"
     } else if daysFromToday < 365 {
-        titleText = "Boom! Less than 1 year left!"
+        titleText = "Boom! Less than 1 year left \(thisEmployee.name)!"
     } else if yearsFromToday <= 2 {
-        titleText = "Whoa! Victory is near!"
+        titleText = "Whoa! Victory is near \(thisEmployee.name)!"
     } else if yearsFromToday <= 5 {
-        titleText = "Wow! The goal in sight!"
+        titleText = "Wow! The goal in sight \(thisEmployee.name)!"
     } else if yearsFromToday < 10 {
-        titleText = "Awesome! Getting close!"
+        titleText = "Awesome! Getting close \(thisEmployee.name)!"
     } else if yearsFromToday <= 14 {
-        titleText = "Doing great!"
+        titleText = "Doing great \(thisEmployee.name)!"
     } else if yearsFromToday <= 18 {
-        titleText = "Keep trucking!"
+        titleText = "Keep trucking \(thisEmployee.name)!"
     } else {
-        titleText = "Hunker down!"
+        titleText = "Hunker down \(thisEmployee.name)!"
     }
     
 
@@ -211,7 +211,7 @@ func calculateRetirement (longForm: Bool) -> (title: String, body: String)  {
     if longForm {
     
         
-     bodyText = ("Eligible to retire after working \(thisEmployee.yearsWorked) years at age \(thisEmployee.age) on \(dateArray.printableString). That is in \(yearsFromToday) years or \(daysFromToday) days from now. If you are still employed, you now have been employed \(yearsFromStartToToday) years. \n\n\(thisEmployee.reasonEligible)"
+     bodyText = ("\(thisEmployee.name) is eligible to retire after working \(thisEmployee.yearsWorked) years at age \(thisEmployee.age) on \(dateArray.printableString). That is in \(yearsFromToday) years or \(daysFromToday) days from now. If you are still employed, you now have been employed \(yearsFromStartToToday) years. \n\n\(thisEmployee.reasonEligible)"
     )
         
     } else {

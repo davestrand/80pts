@@ -20,6 +20,8 @@
 		F39258FC1EE739A40062BA03 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39258D81EE08C6B0062BA03 /* TodayViewController.swift */; };
 		F39258FE1EE770960062BA03 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39258FD1EE770960062BA03 /* People.swift */; };
 		F39259001EE87A100062BA03 /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39258FF1EE87A100062BA03 /* PeopleViewController.swift */; };
+		F3D1A6BA1EE9B88700AAA633 /* PeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D1A6B91EE9B88700AAA633 /* PeopleCell.swift */; };
+		F3D1A6BC1EEA0A8900AAA633 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D1A6BB1EEA0A8900AAA633 /* Helpers.swift */; };
 		F3D954BB1E0AFC4600D33A6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D954BA1E0AFC4600D33A6F /* AppDelegate.swift */; };
 		F3D954BD1E0AFC4600D33A6F /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D954BC1E0AFC4600D33A6F /* EditViewController.swift */; };
 		F3D954C01E0AFC4600D33A6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3D954BE1E0AFC4600D33A6F /* Main.storyboard */; };
@@ -81,6 +83,8 @@
 		F39258F61EE72D0F0062BA03 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F39258FD1EE770960062BA03 /* People.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
 		F39258FF1EE87A100062BA03 /* PeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
+		F3D1A6B91EE9B88700AAA633 /* PeopleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleCell.swift; sourceTree = "<group>"; };
+		F3D1A6BB1EEA0A8900AAA633 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		F3D954B71E0AFC4600D33A6F /* 80pts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 80pts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D954BA1E0AFC4600D33A6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3D954BC1E0AFC4600D33A6F /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
@@ -181,10 +185,12 @@
 				F39258EA1EE60DB10062BA03 /* 80pts.entitlements */,
 				F3D954BE1E0AFC4600D33A6F /* Main.storyboard */,
 				F3D954C11E0AFC4600D33A6F /* Assets.xcassets */,
-				F39258FF1EE87A100062BA03 /* PeopleViewController.swift */,
 				F3D954BC1E0AFC4600D33A6F /* EditViewController.swift */,
+				F39258FF1EE87A100062BA03 /* PeopleViewController.swift */,
+				F3D1A6B91EE9B88700AAA633 /* PeopleCell.swift */,
 				F39258F61EE72D0F0062BA03 /* Constants.swift */,
 				F3F2F4A11E0C29ED00DC722F /* Person.swift */,
+				F3D1A6BB1EEA0A8900AAA633 /* Helpers.swift */,
 				F39258FD1EE770960062BA03 /* People.swift */,
 				F3F2F4A31E0C36A500DC722F /* Date.swift */,
 				F3F2F4A51E0C3D1300DC722F /* Rules.swift */,
@@ -409,7 +415,9 @@
 			files = (
 				F3D954BD1E0AFC4600D33A6F /* EditViewController.swift in Sources */,
 				F3F2F4A41E0C36A500DC722F /* Date.swift in Sources */,
+				F3D1A6BA1EE9B88700AAA633 /* PeopleCell.swift in Sources */,
 				F3D954E91E0AFC7700D33A6F /* Calculations.swift in Sources */,
+				F3D1A6BC1EEA0A8900AAA633 /* Helpers.swift in Sources */,
 				F3F2F4A21E0C29ED00DC722F /* Person.swift in Sources */,
 				F39258FE1EE770960062BA03 /* People.swift in Sources */,
 				F39259001EE87A100062BA03 /* PeopleViewController.swift in Sources */,

@@ -18,9 +18,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         Defaults.group?.synchronize()
         Person.registerClassName()
+
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -28,9 +31,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-    
+      
         var bodyText = ""
         var titleText = ""
+        titleLabel?.text = titleText
+        bodyLabel?.text = bodyText
         
         if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let lastPersonChecked = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
             

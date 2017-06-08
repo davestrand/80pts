@@ -61,6 +61,30 @@ extension People {
         
         }
     
+    static func duplicateName(name: String) -> Int {
+        
+        var answer = 0
+        
+        for each in list {
+            
+            if each.name.charsOnly() == name.charsOnly() { //same name?
+                answer = 1 //well then there's at least one other
+
+                if let lastChar = each.name.characters.last {
+                    if let lastNum = Int(String(lastChar)) {
+                        if lastNum >= answer {
+                            answer = lastNum + 1
+                
+                        }
+                    }
+                }
+                }
+            }
+        return answer
+    }
+
+
+    
     static func persist (ppl:[Person]) {
         
         let encodedData = NSKeyedArchiver.archivedData(withRootObject: ppl)
@@ -82,7 +106,5 @@ extension People {
     }
     
     
-
-
 
 

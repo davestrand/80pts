@@ -11,17 +11,18 @@ import UIKit
 class PeopleViewController: UIViewController{
     
     @IBOutlet weak var addPersonButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var pplView: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        //self.pplView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+
         
         Defaults.group?.synchronize()
         Person.registerClassName()
-        People.registerClassName()
+        //People.registerClassName()
 
         loadPeople()
         
@@ -29,22 +30,26 @@ class PeopleViewController: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
 
-        tableView.reloadData()
+        pplView.reloadData()
         print("appeared")
     }
 
     
     @IBAction func addPerson(_ sender: Any) {
         
-        People.add(thisPerson: thisEmployee)
+        
+        let newEmployee = Person.init(name: "Unnamed Employee", birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: "Not yet eligible.")
+        
+        
+        People.add(thisPerson: newEmployee)
         People.persist(ppl: list)
-        tableView.reloadData()
+        pplView.reloadData()
 
     }
-    
-    
+ 
+ 
     func loadPeople() {
-        
+ 
         if let data =  Defaults.group?.data(forKey: Key.people), let thesePeople = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Person] {
             list = thesePeople
         } else {
@@ -52,7 +57,7 @@ class PeopleViewController: UIViewController{
         }
         
         
-        tableView.reloadData()
+        pplView.reloadData()
 
         
     }
@@ -68,21 +73,28 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "cell")!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as! PeopleCell
+
+            let thisPerson = list[indexPath.row]
             
-            cell.textLabel?.text = list[indexPath.row].name
+            cell.name.text = thisPerson.name
+            
+            if cell.name.text == thisEmployee.name {
+                cell.selectedOrNot.text = "(Selected)"
+            } else {
+                cell.selectedOrNot.text = ""
+            }
             
             return cell
         }
     
     
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            
             print("You selected cell #\(indexPath.row)!")
             
             thisEmployee = list[indexPath.row]
-   
             showEditScreen()
-    
         }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

@@ -203,12 +203,24 @@ extension EditViewController: UITextFieldDelegate {
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         print("While entering the characters this method gets called")
-        return true 
+        
+        return true
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("TextField should return method called, \(textField.text ?? "nah")")
-        thisEmployee.name = "\(textField.text ?? "Unnamed")"
+       
+        var newName: String = textField.text ?? ""
+        
+        let countedDuplicateNames = People.duplicateName(name: newName)
+        
+        if countedDuplicateNames > 0  {
+            newName = "\(newName) \(countedDuplicateNames)"
+        }
+        
+
+        thisEmployee.name = newName
         nameField.resignFirstResponder()
+        
+       
         return true
     }
 

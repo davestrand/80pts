@@ -106,8 +106,7 @@ var thisEmployee = Person(name: "David Levy",
                           pointsNeededToRetire: 80,
                           batch: 3,
                           eligible: false,
-                          reasonEligible: "Not yet eligible."
-)
+                          reasonEligible: "Not yet eligible." )
 
 
 //This is added because the extension wasn't properly reading my custom Person class.
