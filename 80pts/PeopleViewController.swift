@@ -36,10 +36,7 @@ class PeopleViewController: UIViewController{
  
         if let data =  Defaults.group?.data(forKey: Key.people), let thesePeople = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Person] {
             list = thesePeople
-        } else {
-            print("There is an issue")
         }
-        
         
         pplView.reloadData()
 
@@ -65,16 +62,31 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
             let thisPerson = list[indexPath.row]
             
             cell.name.text = thisPerson.name
-            
-            if cell.name.text == thisEmployee.name {
-                cell.selectedOrNot.text = "(Selected)"
+                
+               
+            if cell.name.text == selectedEmployee.name {
+                
+                cell.selectedOrNot.text = "."
+                selectedEmployee = thisPerson
+                setupData()
+                
+                cell.information.text = calculateRetirement(person: thisPerson, longForm: false).body
+                
             } else {
                 cell.selectedOrNot.text = ""
+                selectedEmployee = thisPerson
+                setupData()
+                
+                cell.information.text = calculateRetirement(person: thisPerson, longForm: false).body
+
             }
+ 
                 
             } else {
                 
                 cell.name.text = Text.createNew
+                cell.selectedOrNot.text = ""
+                cell.information.text = ""
             }
             
             return cell
@@ -97,13 +109,13 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     
             if onTheList(list: list, row: indexPath.row) {
 
-                thisEmployee = list[indexPath.row]
+                selectedEmployee = list[indexPath.row]
                 showEditScreen()
                 
             } else {
                 let newEmployee = Person.init(name: Text.noName, birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: "Not yet eligible.")
                 
-                thisEmployee = newEmployee
+                selectedEmployee = newEmployee
                 
                 People.add(thisPerson: newEmployee)
                 pplView.reloadData()

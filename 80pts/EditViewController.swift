@@ -36,25 +36,15 @@ class EditViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    
-    
-    
-    //OUTLETS
-
-    
-    
-    
-    
-    //ACTIONS
  
 
     
     @IBAction func caclulateAction(_ sender: Any) {
         setupData()
-        if oldEnoughToWork() {
-            showCalculatedAnswer()
+        if oldEnoughToWork(person: selectedEmployee) {
+            showCalculatedAnswer(person: selectedEmployee)
         } else {
-            showAgeWarning()
+            showAgeWarning(person: selectedEmployee)
         }
     }
     
@@ -72,7 +62,10 @@ class EditViewController: UIViewController {
         longFormat.dateStyle = DateFormatter.Style.medium
         let longDate = longFormat.string(from: birthdayPicker.date)
         let longStrArray = longDate.components(separatedBy:" ")
-        thisEmployee.birthday = [Int(shortStrArray[0])!, Int(shortStrArray[1])!, Int(longStrArray[2])! ]
+        
+        
+        
+        selectedEmployee.birthday = [Int(shortStrArray[0])!, Int(shortStrArray[1])!, Int(longStrArray[2])! ]
 
     }
     
@@ -88,15 +81,15 @@ class EditViewController: UIViewController {
         let longDate = longFormat.string(from: startDayPicker.date)
         let longStrArray = longDate.components(separatedBy:" ")
 
-        thisEmployee.started = [Int(shortStrArray[0])!, Int(shortStrArray[1])!, Int(longStrArray[2])! ]
-        thisEmployee.batch = inferBatch(hireDate: dateFromArray(arr: thisEmployee.started))
+        selectedEmployee.started = [Int(shortStrArray[0])!, Int(shortStrArray[1])!, Int(longStrArray[2])! ]
+        selectedEmployee.batch = inferBatch(hireDate: dateFromArray(arr: selectedEmployee.started))
 
     }
 
-    func persistSelectedEmployee (employee:Person) {
+    func persistSelectedEmployee (person:Person) {
         //https://grokswift.com/notification-center-widget/
         
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: employee)
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: person)
         
 
         if let defaultGroup = Defaults.group {
@@ -105,20 +98,12 @@ class EditViewController: UIViewController {
 
             defaultGroup.set(encodedData, forKey: Key.currentEmployee)
             
-            print("Set data")
-        
             defaultGroup.synchronize()
-
-            print("Synced")
             
             People.persist(ppl: list)
 
 
-        } else {
-            print("DEFAULT GROUP PROBLEM")
         }
-        
-        
         
     }
     
@@ -128,30 +113,28 @@ class EditViewController: UIViewController {
         
         if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let aPerson = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
                 print("\(aPerson.name) is currently stored in group data as primary person.")
-            } else {
-            print("There is an issue")
-        }
+            }
 
     }
     
     func beautitfy() {
         
 
-        if thisEmployee.name == Text.noName {
+        if selectedEmployee.name == Text.noName {
             nameField.becomeFirstResponder()
         } else {
-            nameField.text = thisEmployee.name
+            nameField.text = selectedEmployee.name
         }
         
         birthdayPicker.backgroundColor = UIColor.white
         birthdayPicker.setValue(UIColor.black, forKeyPath: "textColor")
         birthdayPicker.setValue(1.0, forKeyPath: "alpha")
-        birthdayPicker.setDate( dateFromArray(arr: thisEmployee.birthday), animated: true)
+        birthdayPicker.setDate( dateFromArray(arr: selectedEmployee.birthday), animated: true)
         
         startDayPicker.backgroundColor = UIColor.white
         startDayPicker.setValue(UIColor.black, forKeyPath: "textColor")
         startDayPicker.setValue(1.0, forKeyPath: "alpha")
-        startDayPicker.setDate( dateFromArray(arr: thisEmployee.started), animated: true)
+        startDayPicker.setDate( dateFromArray(arr: selectedEmployee.started), animated: true)
         startDayPicker.maximumDate = dateFromArray(arr: dateArray.today)
         
         UIApplication.shared.statusBarStyle = .default
@@ -160,27 +143,27 @@ class EditViewController: UIViewController {
     }
     
     
-    func showCalculatedAnswer() {
+    func showCalculatedAnswer(person:Person) {
         
-        let fancyText = calculateRetirement(longForm: true)
+        let fancyText = calculateRetirement(person: person, longForm: true)
         let alert = UIAlertController(title: fancyText.title, message: fancyText.body, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "How Much?", style: UIAlertActionStyle.default) { action in
-            self.popUpRates()
+            self.popUpRates(person: person)
             })
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
     }
     
-    func showAgeWarning() {
-        let alert = UIAlertController(title: "Hmm.", message: "Your starting age is \(thisEmployee.age) which is not old enough to work in Arizona.  Please check both dates to be sure they are accurate.", preferredStyle: UIAlertControllerStyle.alert)
+    func showAgeWarning(person:Person) {
+        let alert = UIAlertController(title: "Hmm.", message: "Your starting age is \(person.age) which is not old enough to work in Arizona.  Please check both dates to be sure they are accurate.", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
-    func popUpRates() {
+    func popUpRates(person:Person) {
         
-        let asrPayRates = "After working \(thisEmployee.yearsWorked) years your Percentage of Average Monthly Compensation would likely be \(calculateMonthlyCompensation(i:thisEmployee.yearsWorked)).  Remember, more Service Credits = higher percentage paid. \n5 = 10.50%\n10 = 21.00%\n15 = 31.50%\n20 = 43.00%\n23 = 49.45%\n25 = 55.00%\n27 = 59.40%\n30 = 69.00%\n32 = 73.60%\n\n\(batchText(b: thisEmployee.batch))"
+        let asrPayRates = "After working \(person.yearsWorked) years your Percentage of Average Monthly Compensation would likely be \(calculateMonthlyCompensation(i:person.yearsWorked)).  Remember, more Service Credits = higher percentage paid. \n5 = 10.50%\n10 = 21.00%\n15 = 31.50%\n20 = 43.00%\n23 = 49.45%\n25 = 55.00%\n27 = 59.40%\n30 = 69.00%\n32 = 73.60%\n\n\(batchText(b: person.batch))"
         
         let alert = UIAlertController(title: "How Much?", message: asrPayRates, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
@@ -194,29 +177,25 @@ class EditViewController: UIViewController {
 
 extension EditViewController: UITextFieldDelegate {
 
+    /*
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("TextField did begin editing method called")
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("TextField did end editing method called")
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        print("TextField should begin editing method called")
-        return true 
-    }
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        print("TextField should clear method called")
-        return true 
-    }
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        print("TextField should snd editing method called")
-        return true 
-    }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print("While entering the characters this method gets called")
-        
         return true
     }
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        return true
+    }
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
+    */
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        
         //FIXME:  If client puts a number in the newName it messes things up a bit.
@@ -229,7 +208,8 @@ extension EditViewController: UITextFieldDelegate {
             newName = "\(newName) \(countedDuplicateNames)"
         }
 
-        thisEmployee.name = newName
+        selectedEmployee.name = newName
+        
         nameField.resignFirstResponder()
        
         return true
@@ -239,7 +219,7 @@ extension EditViewController: UITextFieldDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         
-        persistSelectedEmployee(employee: thisEmployee)
+        persistSelectedEmployee(person: selectedEmployee)
         
     }
     

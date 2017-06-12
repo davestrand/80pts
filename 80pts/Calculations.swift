@@ -50,81 +50,82 @@ func yearDifference(from: Date, to: Date) -> Int {
 
 
 func setupData () {
+
     dateArray.today = setTodaysDate()
+    dateArray.floating = selectedEmployee.started
     
-    dateArray.floating = thisEmployee.started
-    thisEmployee.age = inferAgeWhenStarted()
-    thisEmployee.yearsWorked = 0
-    thisEmployee.points = thisEmployee.age
-    thisEmployee.eligible = false
+    selectedEmployee.age = inferAgeWhenStarted(person: selectedEmployee)
+    selectedEmployee.yearsWorked = 0
+    selectedEmployee.points = selectedEmployee.age
+    selectedEmployee.eligible = false
     
     
 }
 
-func printEmployeeData () {
-    print("\(thisEmployee.age) yrs old, \(thisEmployee.yearsWorked) yrs worked, \(thisEmployee.points) points earned.")
+func printEmployeeData (person:Person) {
+    print("\(person.age) yrs old, \(person.yearsWorked) yrs worked, \(person.points) points earned.")
 }
 
-func inferAgeWhenStarted() -> Int {
+func inferAgeWhenStarted(person:Person) -> Int {
     var answer = 0
-    let startDate = dateFromArray(arr: thisEmployee.started)
-    let bDate = dateFromArray(arr: thisEmployee.birthday)
+    let startDate = dateFromArray(arr: person.started)
+    let bDate = dateFromArray(arr: person.birthday)
     answer = yearDifference(from: bDate, to: startDate)
     return answer
 }
 
 
-func inferYearsWorked() -> Int {
-    let startDate = dateFromArray(arr: thisEmployee.started)
+func inferYearsWorked(person:Person) -> Int {
+    let startDate = dateFromArray(arr: person.started)
     let today = dateFromArray(arr: dateArray.today)
     let yearsWorked = yearDifference(from: startDate, to: today)
     return yearsWorked
 }
 
 
-func oldEnoughToWork() -> Bool {
-    if thisEmployee.age < 14 {
+func oldEnoughToWork(person:Person) -> Bool {
+    if person.age < 14 {
         return false
     } else {
         return true
     }
 }
 
-func checkIfBirthdayBeforeStartDate () {
-    if thisEmployee.birthday[0] < thisEmployee.started[0] {
-        thisEmployee.birthdayFirst = true
-    } else if thisEmployee.birthday[0] == thisEmployee.started[0] {
-        if thisEmployee.birthday[1] < thisEmployee.started[1] {
-            thisEmployee.birthdayFirst = true
+func checkIfBirthdayBeforeStartDate (person:Person ) {
+    if person.birthday[0] < person.started[0] {
+        person.birthdayFirst = true
+    } else if person.birthday[0] == person.started[0] {
+        if person.birthday[1] < person.started[1] {
+            person.birthdayFirst = true
         }
     }
 }
 
 
-func getBirthdayPoint () {
-    dateArray.printableString = thisDateString(isBDay: true)
-    thisEmployee.age = thisEmployee.age + 1
-    addPoint()
+func getBirthdayPoint (person:Person) {
+    dateArray.printableString = thisDateString(person: person, isBDay: true)
+    person.age = person.age + 1
+    addPoint(person: person)
 }
 
 
-func getWorkAnniversaryPoint() {
-    dateArray.printableString = thisDateString(isBDay: false)
-    thisEmployee.yearsWorked = thisEmployee.yearsWorked + 1
-    addPoint()
+func getWorkAnniversaryPoint(person:Person ) {
+    dateArray.printableString = thisDateString(person: person, isBDay: false)
+    person.yearsWorked = person.yearsWorked + 1
+    addPoint(person: person)
 }
 
 
-func addPoint() {
-    thisEmployee.points = thisEmployee.points + 1
+func addPoint(person:Person) {
+    person.points = person.points + 1
 }
 
 
-func thisDateString(isBDay:Bool) -> String {
+func thisDateString(person:Person, isBDay:Bool) -> String {
     var answer = ""
     if isBDay {
-        answer = "\(thisEmployee.birthday[0])-\(thisEmployee.birthday[1])-\(dateArray.floating[2])"
-        dateArray.printable = [thisEmployee.birthday[0],thisEmployee.birthday[1],dateArray.floating[2]]
+        answer = "\(person.birthday[0])-\(person.birthday[1])-\(dateArray.floating[2])"
+        dateArray.printable = [person.birthday[0],person.birthday[1],dateArray.floating[2]]
     } else {
         answer = "\(dateArray.floating[0])-\(dateArray.floating[1])-\(dateArray.floating[2])"
         dateArray.printable = [dateArray.floating[0],dateArray.floating[1],dateArray.floating[2]]
@@ -140,26 +141,26 @@ func addYear() {
 }
 
 
-func getPoints() {
+func getPoints(person:Person) {
     
-    if thisEmployee.birthdayFirst {
+    if person.birthdayFirst {
         
-        getBirthdayPoint()
-        checkEligibility()
+        getBirthdayPoint(person: person)
+        checkEligibility(person: person)
         
-        if !thisEmployee.eligible {
-            getWorkAnniversaryPoint()
-            checkEligibility()
+        if !person.eligible {
+            getWorkAnniversaryPoint(person: person)
+            checkEligibility(person: person)
         }
         
     } else {
         
-        getWorkAnniversaryPoint()
-        checkEligibility()
+        getWorkAnniversaryPoint(person: person)
+        checkEligibility(person: person)
         
-        if !thisEmployee.eligible {
-            getBirthdayPoint()
-            checkEligibility()
+        if !person.eligible {
+            getBirthdayPoint(person: person)
+            checkEligibility(person: person)
         }
     }
 }
@@ -167,19 +168,19 @@ func getPoints() {
 
 
 
-func calculateRetirement (longForm: Bool) -> (title: String, body: String)  {
+func calculateRetirement (person:Person, longForm: Bool) -> (title: String, body: String)  {
     
-    checkIfBirthdayBeforeStartDate()
+    checkIfBirthdayBeforeStartDate(person:person)
     
     //start counting until eligible..
-    while !thisEmployee.eligible {
-        getPoints()
+    while !person.eligible {
+        getPoints(person: person)
         addYear()
     }
     
     // now format an answer
     let finalDate = dateFromArray(arr: dateArray.printable)
-    let startDate = dateFromArray(arr: thisEmployee.started)
+    let startDate = dateFromArray(arr: person.started)
     let today = dateFromArray(arr: dateArray.today)
     let daysFromToday = dayDifference(from: today, to: finalDate)
     let yearsFromToday = yearDifference(from: today, to: finalDate)
@@ -188,21 +189,21 @@ func calculateRetirement (longForm: Bool) -> (title: String, body: String)  {
     var titleText = "Calculated!"
     
     if daysFromToday <= 0 {
-        titleText = "Congratulations \(thisEmployee.name)! You are eligible!"
+        titleText = "Congratulations \(person.name)! You are eligible!"
     } else if daysFromToday < 365 {
-        titleText = "Boom! Less than 1 year left \(thisEmployee.name)!"
+        titleText = "Boom! Less than 1 year left \(person.name)!"
     } else if yearsFromToday <= 2 {
-        titleText = "Whoa! Victory is near \(thisEmployee.name)!"
+        titleText = "Whoa! Victory is near \(person.name)!"
     } else if yearsFromToday <= 5 {
-        titleText = "Wow! The goal in sight \(thisEmployee.name)!"
+        titleText = "Wow! The goal in sight \(person.name)!"
     } else if yearsFromToday < 10 {
-        titleText = "Awesome! Getting close \(thisEmployee.name)!"
+        titleText = "Awesome! Getting close \(person.name)!"
     } else if yearsFromToday <= 14 {
-        titleText = "Doing great \(thisEmployee.name)!"
+        titleText = "Doing great \(person.name)!"
     } else if yearsFromToday <= 18 {
-        titleText = "Keep trucking \(thisEmployee.name)!"
+        titleText = "Keep trucking \(person.name)!"
     } else {
-        titleText = "Hunker down \(thisEmployee.name)!"
+        titleText = "Hunker down \(person.name)!"
     }
     
 
@@ -211,7 +212,7 @@ func calculateRetirement (longForm: Bool) -> (title: String, body: String)  {
     if longForm {
     
         
-     bodyText = ("\(thisEmployee.name) is eligible to retire after working \(thisEmployee.yearsWorked) years at age \(thisEmployee.age) on \(dateArray.printableString). That is in \(yearsFromToday) years or \(daysFromToday) days from now. If you are still employed, you now have been employed \(yearsFromStartToToday) years. \n\n\(thisEmployee.reasonEligible)"
+     bodyText = ("\(person.name) is eligible to retire after working \(person.yearsWorked) years at age \(person.age) on \(dateArray.printableString). That is in \(yearsFromToday) years or \(daysFromToday) days from now. If you are still employed, you now have been employed \(yearsFromStartToToday) years. \n\n\(person.reasonEligible)"
     )
         
     } else {

@@ -33,44 +33,44 @@ struct BatchData {
 }
 
 
-func checkEligibility () {
+func checkEligibility (person:Person) {
     
-    if thisEmployee.points >= thisEmployee.pointsNeededToRetire {
-        if thisEmployee.yearsWorked >= 5 {
-            thisEmployee.reasonEligible = "Reason: 80 points and at least 5 years."
-            thisEmployee.eligible = true
+    if person.points >= person.pointsNeededToRetire {
+        if person.yearsWorked >= 5 {
+            person.reasonEligible = "Reason: 80 points and at least 5 years."
+            person.eligible = true
         }
     }
     
-    if thisEmployee.age >= 65 {
-        if thisEmployee.batch == Batch.third.rawValue {
-            if thisEmployee.yearsWorked >= 10 {
-                thisEmployee.reasonEligible = "Reason: 65 points and at least 10 years."
-                thisEmployee.eligible = true
+    if person.age >= 65 {
+        if person.batch == Batch.third.rawValue {
+            if person.yearsWorked >= 10 {
+                person.reasonEligible = "Reason: 65 points and at least 10 years."
+                person.eligible = true
             }
         } else {
-            if thisEmployee.yearsWorked >= 5 {
-                thisEmployee.reasonEligible = "Reason: 65 points and at least 5 years."
-                thisEmployee.eligible = true
+            if person.yearsWorked >= 5 {
+                person.reasonEligible = "Reason: 65 points and at least 5 years."
+                person.eligible = true
             }
         }
-    } else if thisEmployee.age >= 62 {
-        if thisEmployee.yearsWorked >= 10 {
-            thisEmployee.reasonEligible = "Reason: 62 points and at least 10 years."
-            thisEmployee.eligible = true
+    } else if person.age >= 62 {
+        if person.yearsWorked >= 10 {
+            person.reasonEligible = "Reason: 62 points and at least 10 years."
+            person.eligible = true
         }
-    } else if thisEmployee.age >= 60 {
-        if thisEmployee.yearsWorked >= 25 {
-            if thisEmployee.batch == Batch.third.rawValue {
-                thisEmployee.reasonEligible = "Reason: 60 points and at least 25 years."
-                thisEmployee.eligible = true
+    } else if person.age >= 60 {
+        if person.yearsWorked >= 25 {
+            if person.batch == Batch.third.rawValue {
+                person.reasonEligible = "Reason: 60 points and at least 25 years."
+                person.eligible = true
             }
         }
-    } else if thisEmployee.age >= 55 {
-        if thisEmployee.yearsWorked >= 30 {
-            if thisEmployee.batch == Batch.third.rawValue {
-                thisEmployee.reasonEligible = "Reason: 55 points and at least 30 years."
-                thisEmployee.eligible = true
+    } else if person.age >= 55 {
+        if person.yearsWorked >= 30 {
+            if person.batch == Batch.third.rawValue {
+                person.reasonEligible = "Reason: 55 points and at least 30 years."
+                person.eligible = true
             }
         }
     }

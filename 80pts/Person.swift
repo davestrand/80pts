@@ -67,8 +67,6 @@ class Person: NSObject, NSCoding {
         self.batch = aDecoder.decodeInteger(forKey: "batch")
         self.eligible = aDecoder.decodeBool(forKey: "eligible")
         self.reasonEligible = aDecoder.decodeObject(forKey: "reasonEligible") as! String
-        print("decoded data")
-
         
     }
     
@@ -87,7 +85,6 @@ class Person: NSObject, NSCoding {
         aCoder.encode(batch, forKey: "batch")
         aCoder.encode(eligible, forKey: "eligible")
         aCoder.encode(reasonEligible, forKey: "reasonEligible")
-        print("encoded data")
         
     }
     
@@ -96,7 +93,7 @@ class Person: NSObject, NSCoding {
 }
 
 
-var thisEmployee = Person(name: "David Levy",
+var selectedEmployee = Person(name: "David Levy",
                           birthday: [10,20,1974],
                           started: [1,5,2005],
                           age: 0,
