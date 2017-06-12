@@ -10,19 +10,15 @@ import UIKit
 
 class PeopleViewController: UIViewController{
     
-    @IBOutlet weak var addPersonButton: UIButton!
     @IBOutlet weak var pplView: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.pplView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-
         
         Defaults.group?.synchronize()
         Person.registerClassName()
-        //People.registerClassName()
 
         loadPeople()
         
@@ -31,7 +27,7 @@ class PeopleViewController: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
 
         pplView.reloadData()
-        print("appeared")
+
     }
 
      
@@ -101,24 +97,25 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     
             if onTheList(list: list, row: indexPath.row) {
 
-            thisEmployee = list[indexPath.row]
-            showEditScreen()
+                thisEmployee = list[indexPath.row]
+                showEditScreen()
                 
             } else {
                 let newEmployee = Person.init(name: Text.noName, birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: "Not yet eligible.")
                 
+                thisEmployee = newEmployee
                 
                 People.add(thisPerson: newEmployee)
-                People.persist(ppl: list)
                 pplView.reloadData()
                 
     
-                thisEmployee = newEmployee
                 
                 showEditScreen()
 
             }
-        }
+    
+
+    }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true

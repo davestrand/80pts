@@ -74,7 +74,6 @@ class EditViewController: UIViewController {
         let longStrArray = longDate.components(separatedBy:" ")
         thisEmployee.birthday = [Int(shortStrArray[0])!, Int(shortStrArray[1])!, Int(longStrArray[2])! ]
 
-        persistSelectedEmployee(employee: thisEmployee)
     }
     
     
@@ -92,7 +91,6 @@ class EditViewController: UIViewController {
         thisEmployee.started = [Int(shortStrArray[0])!, Int(shortStrArray[1])!, Int(longStrArray[2])! ]
         thisEmployee.batch = inferBatch(hireDate: dateFromArray(arr: thisEmployee.started))
 
-        persistSelectedEmployee(employee: thisEmployee)
     }
 
     func persistSelectedEmployee (employee:Person) {
@@ -106,9 +104,15 @@ class EditViewController: UIViewController {
             defaultGroup.set("Group Save Enabled", forKey: "TEST")
 
             defaultGroup.set(encodedData, forKey: Key.currentEmployee)
-            print("saved data I think")
+            
+            print("Set data")
         
             defaultGroup.synchronize()
+
+            print("Synced")
+            
+            People.persist(ppl: list)
+
 
         } else {
             print("DEFAULT GROUP PROBLEM")
@@ -216,24 +220,31 @@ extension EditViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        
         //FIXME:  If client puts a number in the newName it messes things up a bit.
-
         
         var newName: String = textField.text ?? ""
-        
+    
         let countedDuplicateNames = People.duplicateName(name: newName)
         
         if countedDuplicateNames > 0  {
             newName = "\(newName) \(countedDuplicateNames)"
         }
-        
 
         thisEmployee.name = newName
         nameField.resignFirstResponder()
-        
        
         return true
     }
 
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        persistSelectedEmployee(employee: thisEmployee)
+        
+    }
+    
 }
+
+
 
 

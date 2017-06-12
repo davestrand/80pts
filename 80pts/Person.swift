@@ -75,7 +75,7 @@ class Person: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         
         Person.registerClassName()
-        
+                
         aCoder.encode(name, forKey: "name")
         aCoder.encode(birthday, forKey: "birthday")
         aCoder.encode(started, forKey: "started")
