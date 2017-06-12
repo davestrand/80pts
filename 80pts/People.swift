@@ -67,7 +67,7 @@ extension People {
         
         for each in list {
             
-            if each.name.charsOnly() == name.charsOnly() { //same name?
+            if each.name.charsOnly().uppercased() == name.charsOnly().uppercased() { //same name?
                 answer = 1 //well then there's at least one other
 
                 if let lastChar = each.name.characters.last {

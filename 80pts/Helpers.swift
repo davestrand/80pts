@@ -31,13 +31,15 @@ extension String {
         return newString
     }
     
-    func charsOnly() -> String{  //TEST??
+    func charsOnly() -> String{
         
         let stringArray = self.components(separatedBy: NSCharacterSet.letters.inverted)
         let newString = stringArray.joined(separator: "")
         
         return newString
     }
+    
+    
     
     
 }

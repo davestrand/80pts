@@ -132,6 +132,13 @@ class EditViewController: UIViewController {
     
     func beautitfy() {
         
+
+        if thisEmployee.name == Text.noName {
+            nameField.becomeFirstResponder()
+        } else {
+            nameField.text = thisEmployee.name
+        }
+        
         birthdayPicker.backgroundColor = UIColor.white
         birthdayPicker.setValue(UIColor.black, forKeyPath: "textColor")
         birthdayPicker.setValue(1.0, forKeyPath: "alpha")
@@ -208,6 +215,9 @@ extension EditViewController: UITextFieldDelegate {
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        
+        //FIXME:  If client puts a number in the newName it messes things up a bit.
+
+        
         var newName: String = textField.text ?? ""
         
         let countedDuplicateNames = People.duplicateName(name: newName)

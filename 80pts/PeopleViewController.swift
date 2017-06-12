@@ -34,19 +34,7 @@ class PeopleViewController: UIViewController{
         print("appeared")
     }
 
-    
-    @IBAction func addPerson(_ sender: Any) {
-        
-        
-        let newEmployee = Person.init(name: "Unnamed Employee", birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: "Not yet eligible.")
-        
-        
-        People.add(thisPerson: newEmployee)
-        People.persist(ppl: list)
-        pplView.reloadData()
-
-    }
- 
+     
  
     func loadPeople() {
  
@@ -68,12 +56,15 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
-            return list.count
+            return list.count + 1
         }
         
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as! PeopleCell
+            
+            
+            if onTheList(list:list, row:indexPath.row) {
 
             let thisPerson = list[indexPath.row]
             
@@ -84,17 +75,49 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
             } else {
                 cell.selectedOrNot.text = ""
             }
+                
+            } else {
+                
+                cell.name.text = Text.createNew
+            }
             
             return cell
         }
     
     
+    func onTheList (list:[Person], row:Int) -> Bool {
+        
+        if row < list.count {
+            return true
+        } else {
+            return false
+        }
+        
+    }
+    
+    
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             
-            print("You selected cell #\(indexPath.row)!")
-            
+    
+            if onTheList(list: list, row: indexPath.row) {
+
             thisEmployee = list[indexPath.row]
             showEditScreen()
+                
+            } else {
+                let newEmployee = Person.init(name: Text.noName, birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: "Not yet eligible.")
+                
+                
+                People.add(thisPerson: newEmployee)
+                People.persist(ppl: list)
+                pplView.reloadData()
+                
+    
+                thisEmployee = newEmployee
+                
+                showEditScreen()
+
+            }
         }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -104,8 +127,12 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
 
-            list.remove(at: indexPath.row)
+            if onTheList(list: list, row: indexPath.row) {
+                list.remove(at: indexPath.row)
+            }
+            
             tableView.reloadData()
+        
         }
     }
     

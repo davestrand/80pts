@@ -15,6 +15,12 @@ class Defaults {
     
 }
 
+class Text {
+    
+    static let createNew = "+ Create New +"
+    static let noName = "..."
+}
+
 class Key {
     
     static let currentEmployee = "CurrentEmployee"
