@@ -24,8 +24,6 @@ class EditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        setupData()
         beautitfy()
         
     }
@@ -40,7 +38,7 @@ class EditViewController: UIViewController {
 
     
     @IBAction func caclulateAction(_ sender: Any) {
-        setupData()
+
         if oldEnoughToWork(person: selectedEmployee) {
             showCalculatedAnswer(person: selectedEmployee)
         } else {
@@ -94,7 +92,7 @@ class EditViewController: UIViewController {
 
         if let defaultGroup = Defaults.group {
             
-            defaultGroup.set("Group Save Enabled", forKey: "TEST")
+            defaultGroup.set("Group Save Enabled", forKey: "TEST") //TODO: NEEEDED?
 
             defaultGroup.set(encodedData, forKey: Key.currentEmployee)
             

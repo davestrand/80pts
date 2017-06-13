@@ -49,8 +49,10 @@ func yearDifference(from: Date, to: Date) -> Int {
 
 
 
-func setupData () {
+func setupData (nowSelect person:Person) {
 
+    selectedEmployee = person
+    
     dateArray.today = setTodaysDate()
     dateArray.floating = selectedEmployee.started
     
