@@ -8,14 +8,6 @@
 
 import UIKit
 
-class Helper {
-
-    
-    
-
-}
-
-
 
 extension String {
     
@@ -38,8 +30,6 @@ extension String {
         
         return newString
     }
-    
-    
     
     
 }

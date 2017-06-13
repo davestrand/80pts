@@ -11,31 +11,18 @@ import Foundation
 var list = [Person]()
 
 class People: NSObject, NSCoding {
-
     
     required init (coder aDecoder: NSCoder) {
         
         People.registerClassName()
-        
         list = aDecoder.decodeObject(forKey: "list") as! [Person]
-
-        
-        
     }
     
     func encode(with aCoder: NSCoder) {
         
         People.registerClassName()
-        
         aCoder.encode(list, forKey: "list")
-        
     }
-    
-
-    
-}
-
-extension People {
     
     enum ErrorType: Error {
         case personCannotBeLoaded
@@ -44,7 +31,6 @@ extension People {
         case noPersonIsSaved
 
     }
-    
     
     static func add(thisPerson: Person) {
         
@@ -83,27 +69,19 @@ extension People {
         return answer
     }
 
-
-    
     static func persist (ppl:[Person]) {
         
         let encodedData = NSKeyedArchiver.archivedData(withRootObject: ppl)
         
         if let defaultGroup = Defaults.group {
-            
             defaultGroup.set(encodedData, forKey: Key.people)
-            
             defaultGroup.synchronize()
-            
-        } else {
-            print("PEOPLE PROBLEM")
         }
-        
-        
-        
     }
-
-    }
+    
+    
+    
+}
     
     
 

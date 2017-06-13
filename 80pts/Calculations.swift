@@ -48,7 +48,7 @@ func yearDifference(from: Date, to: Date) -> Int {
 }
 
 
-
+/*
 func setupData (nowSelect person:Person) {
 
     selectedEmployee = person
@@ -63,6 +63,7 @@ func setupData (nowSelect person:Person) {
     
     
 }
+ */
 
 func printEmployeeData (person:Person) {
     print("\(person.age) yrs old, \(person.yearsWorked) yrs worked, \(person.points) points earned.")

@@ -10,8 +10,10 @@ import UIKit
 
 class PeopleCell: UITableViewCell {
     
-    @IBOutlet weak var selectedOrNot: UILabel!
     @IBOutlet weak var information: UILabel!
     @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var edit: UIButton!
     
 }
+
+

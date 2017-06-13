@@ -35,6 +35,8 @@ class Person: NSObject, NSCoding {
     var eligible: Bool
     var reasonEligible: String
     
+    
+    
 
     init(name: String, birthday: [Int], started: [Int], age: Int, points: Int, yearsWorked: Int, birthdayFirst: Bool, pointsNeededToRetire: Int, batch: Int, eligible: Bool, reasonEligible: String) {
         
@@ -93,18 +95,6 @@ class Person: NSObject, NSCoding {
 }
 
 
-var selectedEmployee = Person(name: "David Levy",
-                          birthday: [10,20,1974],
-                          started: [1,5,2005],
-                          age: 0,
-                          points: 0,
-                          yearsWorked: 0,
-                          birthdayFirst: false,
-                          pointsNeededToRetire: 80,
-                          batch: 3,
-                          eligible: false,
-                          reasonEligible: "Not yet eligible." )
-
 
 //This is added because the extension wasn't properly reading my custom Person class.
 //https://stackoverflow.com/questions/43864708/nskeyedunarchiver-unarchiveobject-fails-with-an-error-when-picking-data-from-use
@@ -115,4 +105,84 @@ extension NSCoding {
         NSKeyedUnarchiver.setClass(self, forClassName: className)
     }
 }
+
+
+
+//Exposed for Today Widget...
+func setAsSelected(thisPerson: Person) {
+    
+    Selected.person = thisPerson
+    Selected.id = thisPerson.name
+    
+    dateArray.today = setTodaysDate()
+    dateArray.floating = Selected.person.started
+    
+    Selected.person.age = inferAgeWhenStarted(person: Selected.person)
+    Selected.person.yearsWorked = 0
+    Selected.person.points = Selected.person.age
+    Selected.person.eligible = false
+    
+
+    
+}
+
+func initializeDates (thisPerson: Person) {
+    
+    dateArray.today = setTodaysDate()
+    dateArray.floating = thisPerson.started
+    
+    
+}
+
+
+
+public class Selected {
+    
+    static var id = ""
+    
+    static var person = Person(name: "David Levy",
+    birthday: [10,20,1974],
+    started: [1,5,2005],
+    age: 0,
+    points: 0,
+    yearsWorked: 0,
+    birthdayFirst: false,
+    pointsNeededToRetire: 80,
+    batch: 3,
+    eligible: false,
+    reasonEligible: "Not yet eligible." )
+    
+}
+
+func persistSelectedEmployee (person:Person ) {
+    //https://grokswift.com/notification-center-widget/
+    
+    let encodedData = NSKeyedArchiver.archivedData(withRootObject: person)
+    
+    
+    if let defaultGroup = Defaults.group {
+        
+        defaultGroup.set("Group Save Enabled", forKey: "TEST") //TODO: NEEEDED?
+        
+        defaultGroup.set(encodedData, forKey: Key.currentEmployee)
+        
+        defaultGroup.synchronize()
+        
+        
+    }
+}
+
+/*
+var selectedEmployee = Person(name: "David Levy",
+                              birthday: [10,20,1974],
+                              started: [1,5,2005],
+                              age: 0,
+                              points: 0,
+                              yearsWorked: 0,
+                              birthdayFirst: false,
+                              pointsNeededToRetire: 80,
+                              batch: 3,
+                              eligible: false,
+                              reasonEligible: "Not yet eligible." )
+*/
 

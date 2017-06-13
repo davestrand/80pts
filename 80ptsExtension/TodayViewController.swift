@@ -39,10 +39,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let lastPersonChecked = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
             
-            setupData(nowSelect: lastPersonChecked)
+            setAsSelected(thisPerson: lastPersonChecked)
             
-            if oldEnoughToWork(person: selectedEmployee) {
-                let answer = calculateRetirement(person: selectedEmployee, longForm: false)
+            if oldEnoughToWork(person: lastPersonChecked) {
+                let answer = calculateRetirement(person: lastPersonChecked, longForm: false)
                 bodyText = answer.body
                 titleText = answer.title
             } else {
