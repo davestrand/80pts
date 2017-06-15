@@ -37,11 +37,14 @@ struct BatchData {
 func checkEligibility (person:Person) {
     
     if person.points >= person.pointsNeededToRetire {
+        if person.yearsWorked >= 5 {
+
             person.reasonEligible = "Reason: 80 points and at least 5 years."
             
             if person.yearsWorked >= person.wageYearsRequired {
                 person.eligible = true
             }
+        }
     }
     
     if person.age >= 65 {

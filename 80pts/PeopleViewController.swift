@@ -20,10 +20,22 @@ class PeopleViewController: UIViewController{
         Defaults.group?.synchronize()
         Person.registerClassName()
         loadPeople()
+        
+        
+
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         refreshTable()
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
     }
     
     func refreshTable(){
@@ -60,8 +72,14 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as! PeopleCell
         
+        //let view = UIView()
+       // cell.selectedBackgroundView = view
+        cell.selectionStyle = UITableViewCellSelectionStyle.blue
+
         
         if onTheList(list:list, row:indexPath.row) {
+            
+        
             
             let thisPerson = list[indexPath.row]
             
@@ -72,19 +90,20 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
             cell.edit.tag = indexPath.row
             cell.edit.addTarget(self, action: #selector(PeopleViewController.editAction(_:)), for: UIControlEvents.touchUpInside)
             cell.edit.isHidden = false
+            cell.backgroundColor = Colors.cellBackgroundNormal
+
             
         } else {
             
             cell.name.text = Text.createNew
             cell.information.text = ""
             cell.edit.isHidden = true
-            
+            cell.backgroundColor = Colors.cellBackgroundCreateNew
+
         }
         
         if cell.name.text == tempNameString {
-            cell.backgroundColor = UIColor.cyan
-        } else {
-            cell.backgroundColor = UIColor.clear
+            cell.backgroundColor = Colors.cellBackgroundSelected
         }
         
         return cell
@@ -137,11 +156,20 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             
+            
             if onTheList(list: list, row: indexPath.row) {
+                
                 list.remove(at: indexPath.row)
+            
+                tableView.beginUpdates()
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.endUpdates()
+
+            
             }
             
-            tableView.reloadData()
+            //tableView.reloadData()
+
         }
     }
     

@@ -215,12 +215,12 @@ func calculateRetirement (person:Person, longForm: Bool) -> (title: String, body
     if longForm {
     
         
-     bodyText = ("\(person.name) is eligible to retire at \(person.percentOfWages) percent of wages after working \(person.yearsWorked) years at age \(person.age) on \(dateArray.printableString). That is in \(yearsFromToday) years or \(daysFromToday) days from now. If you are still employed, you now have been employed \(yearsFromStartToToday) years. \n\n\(person.reasonEligible)"
+     bodyText = ("\(person.name) is eligible to retire at \(person.percentOfWages)% of wages after working \(person.yearsWorked) years at age \(person.age) on \(dateArray.printableString). That is in \(yearsFromToday) years or \(daysFromToday) days from now. If you are still employed, you now have been employed \(yearsFromStartToToday) years. \n\n\(person.reasonEligible)"
     )
         
     } else {
         
-        bodyText = ("Can retire on \(dateArray.printableString) at \(person.percentOfWages) percent of wages in \(yearsFromToday) years or \(daysFromToday) days from now.")
+        bodyText = ("Can retire on \(dateArray.printableString) at \(person.percentOfWages)% of wages in \(yearsFromToday) years or \(daysFromToday) days from now.")
         
     }
     

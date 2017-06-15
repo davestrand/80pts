@@ -16,25 +16,74 @@ class EditViewController: UIViewController {
     @IBOutlet weak var wagesReplacedLabel: UILabel!
     @IBOutlet weak var wagesReplacedStepper: UIStepper!
     @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var nameBlocker: UIButton!
+    
+    var tempName = ""
 
 }
 
 
 extension EditViewController: UITextFieldDelegate {
 
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        nameField.addTarget(self, action: #selector(typingName), for: .editingChanged)
+        
         beautitfy()
     }
     
     
+    func nameEditModeBegin() {
+       
+        nameBlocker.isHidden = false
+        nameField.becomeFirstResponder()
+        navigationController?.isNavigationBarHidden = true
+
+
+    }
+    
+    func nameEditEnd () {
+
+        
+        nameBlocker.isHidden = true
+        nameField.resignFirstResponder()
+
+        let countedDuplicateNames = People.duplicateName(name: tempName)
+        
+        if countedDuplicateNames > 0  {
+            tempName = "\(tempName) \(countedDuplicateNames)"
+        }
+        
+        Selected.person.name = tempName
+        
+        nameField.resignFirstResponder()
+        navigationController?.isNavigationBarHidden = false
+
+        
+    }
+    
+    func typingName(textField:UITextField){
+        
+        if let typedText = textField.text {
+            tempName = typedText
+        }
+    }
+    
     func beautitfy() {
-                
+        
         if Selected.person.name == Text.noName {
-            nameField.becomeFirstResponder()
+            nameEditModeBegin()
+            
         } else {
             nameField.text = Selected.person.name
+            nameBlocker.isHidden = true
         }
         
         wagesReplacedLabel.text = "Wages: \(Selected.person.percentOfWages)%"
@@ -75,7 +124,11 @@ extension EditViewController: UITextFieldDelegate {
         
     }
     
-
+    @IBAction func blockerTouched(_ sender: Any) {
+        
+        nameEditEnd()
+        
+    }
     
     @IBAction func bDayAction(_ sender: Any) {
         let shortFormat = DateFormatter()
@@ -106,22 +159,20 @@ extension EditViewController: UITextFieldDelegate {
         Selected.person.batch = inferBatch(hireDate: dateFromArray(arr: Selected.person.started))
     }
 
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        nameEditModeBegin()
+        
+    }
+    
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-       
-        //FIXME:  If client puts a number in the newName it messes things up a bit.
         
-        var newName: String = textField.text ?? ""
+        tempName = textField.text ?? ""
     
-        let countedDuplicateNames = People.duplicateName(name: newName)
+        nameEditEnd()
         
-        if countedDuplicateNames > 0  {
-            newName = "\(newName) \(countedDuplicateNames)"
-        }
-
-        Selected.person.name = newName
-        
-        nameField.resignFirstResponder()
        
         return true
     }

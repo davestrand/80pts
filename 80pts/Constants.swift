@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 
 class Defaults {
     
@@ -25,6 +27,23 @@ class Key {
     
     static let currentEmployee = "CurrentEmployee"
     static let people = "People"
+    
+}
+
+struct Colors {
+    //https://www.ralfebert.de/snippets/ios/swift-uicolor-picker/
+    
+    static let brightnessRange = 40
+    
+    
+    static let cellBackgroundNormal = UIColor(hue: 205/360, saturation: 100/100, brightness: 50/100, alpha: 1.0)
+
+    static let cellBackgroundSelected = UIColor(hue: 205/360, saturation: 100/100, brightness: 80/100, alpha: 1.0)
+
+    static let cellBackgroundCreateNew = UIColor(hue: 205/360, saturation: 20/100, brightness: 20/100, alpha: 1.0)
+    
+    static let cellBackgroundPressHighlight = UIColor(hue: 205/360, saturation: 100/100, brightness: 50/100, alpha: 1.0)
+
     
 }
 
