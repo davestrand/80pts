@@ -33,44 +33,54 @@ struct BatchData {
 }
 
 
+
 func checkEligibility (person:Person) {
     
     if person.points >= person.pointsNeededToRetire {
-        if person.yearsWorked >= 5 {
             person.reasonEligible = "Reason: 80 points and at least 5 years."
-            person.eligible = true
-        }
+            
+            if person.yearsWorked >= person.wageYearsRequired {
+                person.eligible = true
+            }
     }
     
     if person.age >= 65 {
         if person.batch == Batch.third.rawValue {
             if person.yearsWorked >= 10 {
                 person.reasonEligible = "Reason: 65 points and at least 10 years."
+                if person.yearsWorked >= person.wageYearsRequired {
                 person.eligible = true
+                }
             }
         } else {
-            if person.yearsWorked >= 5 {
                 person.reasonEligible = "Reason: 65 points and at least 5 years."
+                if person.yearsWorked >= person.wageYearsRequired {
                 person.eligible = true
-            }
+                }
         }
     } else if person.age >= 62 {
         if person.yearsWorked >= 10 {
             person.reasonEligible = "Reason: 62 points and at least 10 years."
-            person.eligible = true
+            if person.yearsWorked >= person.wageYearsRequired {
+                person.eligible = true
+            }
         }
     } else if person.age >= 60 {
         if person.yearsWorked >= 25 {
             if person.batch == Batch.third.rawValue {
                 person.reasonEligible = "Reason: 60 points and at least 25 years."
-                person.eligible = true
+                if person.yearsWorked >= person.wageYearsRequired {
+                    person.eligible = true
+                }
             }
         }
     } else if person.age >= 55 {
         if person.yearsWorked >= 30 {
             if person.batch == Batch.third.rawValue {
                 person.reasonEligible = "Reason: 55 points and at least 30 years."
+                if person.yearsWorked >= person.wageYearsRequired {
                 person.eligible = true
+                }
             }
         }
     }

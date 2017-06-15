@@ -37,6 +37,11 @@ extension EditViewController: UITextFieldDelegate {
             nameField.text = Selected.person.name
         }
         
+        wagesReplacedLabel.text = "Wages: \(Selected.person.percentOfWages)%"
+        wagesReplacedStepper.minimumValue = 0.0
+        wagesReplacedStepper.maximumValue = Double(Wage.options.count) - 1
+        wagesReplacedStepper.value = wageIndex(person: Selected.person)
+        
         birthdayPicker.backgroundColor = UIColor.white
         birthdayPicker.setValue(UIColor.black, forKeyPath: "textColor")
         birthdayPicker.setValue(1.0, forKeyPath: "alpha")
@@ -56,6 +61,21 @@ extension EditViewController: UITextFieldDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    @IBAction func wagesAdjusted(_ sender: Any) {
+        
+        
+       let newOption = newWagePercentage(stepperIndex: wagesReplacedStepper.value)
+        Selected.person.percentOfWages = newOption.percent
+        Selected.person.wageMultiplier = newOption.multiplier
+        Selected.person.wageYearsRequired = newOption.years
+        
+        wagesReplacedLabel.text = "Wages: \(Selected.person.percentOfWages)%"
+        
+        
+        
+    }
+    
+
     
     @IBAction func bDayAction(_ sender: Any) {
         let shortFormat = DateFormatter()

@@ -8,18 +8,6 @@
 
 import Foundation
 
-//protocol Employee {
-//    var birthday: [Int] { get }
-//    var started: [Int] { get }
-//    var age:Int { get }
-//    var points:Int { get }
-//    var yearsWorked:Int { get }
-//    var birthdayFirst:Bool { get }
-//    var pointsNeededToRetire:Int { get }
-//    var batch:Batch { get }
-//    var eligible:Bool { get }
-//    var reasonEligible:String { get }
-//}
 
 class Person: NSObject, NSCoding {
     
@@ -34,11 +22,13 @@ class Person: NSObject, NSCoding {
     var batch: Int
     var eligible: Bool
     var reasonEligible: String
-    
+    var percentOfWages: Double
+    var wageMultiplier: Double
+    var wageYearsRequired: Int
     
     
 
-    init(name: String, birthday: [Int], started: [Int], age: Int, points: Int, yearsWorked: Int, birthdayFirst: Bool, pointsNeededToRetire: Int, batch: Int, eligible: Bool, reasonEligible: String) {
+    init(name: String, birthday: [Int], started: [Int], age: Int, points: Int, yearsWorked: Int, birthdayFirst: Bool, pointsNeededToRetire: Int, batch: Int, eligible: Bool, reasonEligible: String, percentOfWages: Double, wageMultiplier: Double, wageYearsRequired: Int) {
         
         self.name = name
         self.birthday = birthday
@@ -51,6 +41,9 @@ class Person: NSObject, NSCoding {
         self.batch = batch
         self.eligible = eligible
         self.reasonEligible = reasonEligible
+        self.percentOfWages = percentOfWages
+        self.wageMultiplier = wageMultiplier
+        self.wageYearsRequired = wageYearsRequired
         
     }
     
@@ -69,7 +62,9 @@ class Person: NSObject, NSCoding {
         self.batch = aDecoder.decodeInteger(forKey: "batch")
         self.eligible = aDecoder.decodeBool(forKey: "eligible")
         self.reasonEligible = aDecoder.decodeObject(forKey: "reasonEligible") as! String
-        
+        self.percentOfWages = aDecoder.decodeDouble(forKey: "percentOfWages")
+        self.wageMultiplier = aDecoder.decodeDouble(forKey: "wageMultiplier")
+        self.wageYearsRequired = aDecoder.decodeInteger(forKey: "wageYearsRequired")
     }
     
     func encode(with aCoder: NSCoder) {
@@ -87,6 +82,9 @@ class Person: NSObject, NSCoding {
         aCoder.encode(batch, forKey: "batch")
         aCoder.encode(eligible, forKey: "eligible")
         aCoder.encode(reasonEligible, forKey: "reasonEligible")
+        aCoder.encode(percentOfWages, forKey: "percentOfWages")
+        aCoder.encode(wageMultiplier, forKey: "wageMultiplier")
+        aCoder.encode(wageYearsRequired, forKey: "wageYearsRequired")
         
     }
     
@@ -150,7 +148,11 @@ public class Selected {
     pointsNeededToRetire: 80,
     batch: 3,
     eligible: false,
-    reasonEligible: "Not yet eligible." )
+    reasonEligible: "Not yet eligible.",
+    percentOfWages: 55.00,
+    wageMultiplier: 2.20,
+    wageYearsRequired: 25
+    )
     
 }
 
@@ -171,18 +173,3 @@ func persistSelectedEmployee (person:Person ) {
         
     }
 }
-
-/*
-var selectedEmployee = Person(name: "David Levy",
-                              birthday: [10,20,1974],
-                              started: [1,5,2005],
-                              age: 0,
-                              points: 0,
-                              yearsWorked: 0,
-                              birthdayFirst: false,
-                              pointsNeededToRetire: 80,
-                              batch: 3,
-                              eligible: false,
-                              reasonEligible: "Not yet eligible." )
-*/
-

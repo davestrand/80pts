@@ -215,12 +215,12 @@ func calculateRetirement (person:Person, longForm: Bool) -> (title: String, body
     if longForm {
     
         
-     bodyText = ("\(person.name) is eligible to retire after working \(person.yearsWorked) years at age \(person.age) on \(dateArray.printableString). That is in \(yearsFromToday) years or \(daysFromToday) days from now. If you are still employed, you now have been employed \(yearsFromStartToToday) years. \n\n\(person.reasonEligible)"
+     bodyText = ("\(person.name) is eligible to retire at \(person.percentOfWages) percent of wages after working \(person.yearsWorked) years at age \(person.age) on \(dateArray.printableString). That is in \(yearsFromToday) years or \(daysFromToday) days from now. If you are still employed, you now have been employed \(yearsFromStartToToday) years. \n\n\(person.reasonEligible)"
     )
         
     } else {
         
-        bodyText = ("Can retire on \(dateArray.printableString) in \(yearsFromToday) years or \(daysFromToday) days from now.")
+        bodyText = ("Can retire on \(dateArray.printableString) at \(person.percentOfWages) percent of wages in \(yearsFromToday) years or \(daysFromToday) days from now.")
         
     }
     
@@ -253,6 +253,33 @@ func batchText (b:Int) -> String {
         return "Batch Unknown"
     }
 }
+
+
+func wageIndex (person:Person) -> Double {
+    var answer = 0.0
+    for i in 0...Wage.options.count - 1 {
+        
+        let thisPercent = Wage.options[i].percent
+        
+        if thisPercent == person.percentOfWages {
+            answer = Double(i)
+        }
+    }
+    
+    return answer
+}
+
+
+func newWagePercentage (stepperIndex:Double) -> WageOption {
+
+    let index = Int(stepperIndex)
+    let newOption = Wage.options[index]
+    
+    
+    return newOption
+}
+
+
 
 func calculateMonthlyCompensation (i:Int) -> String {
     

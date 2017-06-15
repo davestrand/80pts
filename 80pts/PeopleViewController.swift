@@ -14,7 +14,7 @@ class PeopleViewController: UIViewController{
     
     @IBOutlet weak var pplView: UITableView!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Defaults.group?.synchronize()
@@ -23,10 +23,10 @@ class PeopleViewController: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        refreshForSelection()
+        refreshTable()
     }
     
-    func refreshForSelection(){
+    func refreshTable(){
         assignSelectedName()
         tempNameString = Selected.id
         pplView.reloadData()
@@ -86,7 +86,7 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         } else {
             cell.backgroundColor = UIColor.clear
         }
-
+        
         return cell
     }
     
@@ -106,26 +106,27 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+        
         if onTheList(list: list, row: indexPath.row) {
             
             setAsSelected(thisPerson: list[indexPath.row])
             showCalculatedAnswer(person: list[indexPath.row])
-        
+            
         } else {
             
-            let newEmployee = Person.init(name: Text.noName, birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: "Not yet eligible.")
-            
+            let newEmployee = Person.init(name: Text.noName, birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: "Not yet eligible.",    percentOfWages: 55.00, wageMultiplier: 2.20, wageYearsRequired: 25)
             setAsSelected(thisPerson: newEmployee)
             People.add(thisPerson: newEmployee)
             showEditScreen()
         }
         
         persistSelectedEmployee(person: Selected.person)
+        
         People.persist(ppl: list)
+        
         pplView.reloadData()
         
-        refreshForSelection()
+        refreshTable()
     }
     
     
@@ -139,7 +140,7 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
             if onTheList(list: list, row: indexPath.row) {
                 list.remove(at: indexPath.row)
             }
-
+            
             tableView.reloadData()
         }
     }
@@ -155,6 +156,7 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         
         navigationController?.pushViewController(detailedView, animated: true)
     }
+    
     
     @IBAction func popRate(_ sender: Any) {
         if let url = NSURL(string: "https://www.azasrs.gov/content/estimate-your-benefits"){ UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) }
