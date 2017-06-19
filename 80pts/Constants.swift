@@ -21,6 +21,8 @@ class Text {
     
     static let createNew = "+ Create New +"
     static let noName = "..."
+    static let ageAlert1 = "You were"
+    static let ageAlert2 = "years old when you started working? That can't be right."
 }
 
 class Key {

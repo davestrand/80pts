@@ -39,14 +39,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let lastPersonChecked = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
             
-            setAsSelected(thisPerson: lastPersonChecked)
+            Helper.setAsSelected(thisPerson: lastPersonChecked)
             
-            if oldEnoughToWork(person: lastPersonChecked) {
-                let answer = calculateRetirement(person: lastPersonChecked, longForm: false)
+            if Determine.oldEnoughToWork(person: lastPersonChecked) {
+                let answer = Determine.retirement(person: lastPersonChecked, longForm: false)
                 bodyText = answer.body
                 titleText = answer.title
             } else {
-                bodyText = "Not old enough to work, keep growing and learning!"
+                bodyText = "\(Text.ageAlert1) \(lastPersonChecked.age) \(Text.ageAlert2)"
             }
 
                 titleLabel?.text = titleText

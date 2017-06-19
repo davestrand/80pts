@@ -94,7 +94,7 @@ extension EditViewController: UITextFieldDelegate {
         wagesReplacedLabel.text = "Wages: \(Selected.person.percentOfWages)%"
         wagesReplacedStepper.minimumValue = 0.0
         wagesReplacedStepper.maximumValue = Double(Wage.options.count) - 1
-        wagesReplacedStepper.value = wageIndex(person: Selected.person)
+        wagesReplacedStepper.value = Determine.wageIndex(person: Selected.person)
         
         birthdayPicker.backgroundColor = UIColor.white
         birthdayPicker.setValue(UIColor.black, forKeyPath: "textColor")
@@ -121,7 +121,7 @@ extension EditViewController: UITextFieldDelegate {
     @IBAction func wagesAdjusted(_ sender: Any) {
         
         
-       let newOption = newWagePercentage(stepperIndex: wagesReplacedStepper.value)
+       let newOption = Determine.wagePercentage(stepperIndex: wagesReplacedStepper.value)
         Selected.person.percentOfWages = newOption.percent
         Selected.person.wageMultiplier = newOption.multiplier
         Selected.person.wageYearsRequired = newOption.years
@@ -164,7 +164,7 @@ extension EditViewController: UITextFieldDelegate {
         let longStrArray = longDate.components(separatedBy:" ")
 
         Selected.person.started = [Int(shortStrArray[0])!, Int(shortStrArray[1])!, Int(longStrArray[2])! ]
-        Selected.person.batch = inferBatch(hireDate: dateFromArray(arr: Selected.person.started))
+        Selected.person.batch = Determine.batch(hireDate: dateFromArray(arr: Selected.person.started))
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -187,7 +187,7 @@ extension EditViewController: UITextFieldDelegate {
 
     override func viewWillDisappear(_ animated: Bool) {
         
-        persistSelectedEmployee(person: Selected.person)
+        Helper.persistSelectedEmployee(person: Selected.person)
         People.persist(ppl: list)
 
     }

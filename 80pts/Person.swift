@@ -110,76 +110,31 @@ extension NSCoding {
 
 
 
-//Exposed for Today Widget...
-func setAsSelected(thisPerson: Person) {
-    
-    Selected.person = thisPerson
-    Selected.id = thisPerson.name //for highlight of selected person
-    
-    dateArray.today = setTodaysDate()
-    dateArray.floating = Selected.person.started
-    
-    Selected.person.age = inferAgeWhenStarted(person: Selected.person)
-    Selected.person.yearsWorked = 0
-    Selected.person.points = Selected.person.age
-    Selected.person.eligible = false
-    
-
-    
-}
-
-func initializeDates (thisPerson: Person) {
-    
-    dateArray.today = setTodaysDate()
-    dateArray.floating = thisPerson.started
-    
-    
-    
-}
-
-func uidReturn () ->String {
-    let uid = UUID().uuidString
-    return uid
-}
-
-
 public class Selected {
     
+    
     static var id = "" //TODO: Move this to UID for selection too.
-
+    
     static var person = Person(name: "David Levy",
-        uid: uidReturn(), //FIXME: Replace with random
+                               uid: "unassigned",
         birthday: [10,20,1974],
-    started: [1,5,2005],
-    age: 0,
-    points: 0,
-    yearsWorked: 0,
-    birthdayFirst: false,
-    pointsNeededToRetire: 80,
-    batch: 3,
-    eligible: false,
-    reasonEligible: "Not yet eligible.",
-    percentOfWages: 55.00,
-    wageMultiplier: 2.20,
-    wageYearsRequired: 25
+        started: [1,5,2005],
+        age: 0,
+        points: 0,
+        yearsWorked: 0,
+        birthdayFirst: false,
+        pointsNeededToRetire: 80,
+        batch: 3,
+        eligible: false,
+        reasonEligible: "Not yet eligible.",
+        percentOfWages: 55.00,
+        wageMultiplier: 2.20,
+        wageYearsRequired: 25
     )
     
 }
 
-func persistSelectedEmployee (person:Person ) {
-    //https://grokswift.com/notification-center-widget/
-    
-    let encodedData = NSKeyedArchiver.archivedData(withRootObject: person)
-    
-    
-    if let defaultGroup = Defaults.group {
-        
-        defaultGroup.set("Group Save Enabled", forKey: "TEST") //TODO: NEEEDED?
-        
-        defaultGroup.set(encodedData, forKey: Key.currentEmployee)
-        
-        defaultGroup.synchronize()
-        
-        
-    }
-}
+
+
+
+

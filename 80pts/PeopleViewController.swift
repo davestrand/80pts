@@ -48,7 +48,7 @@ class PeopleViewController: UIViewController{
         
         if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let lastPersonChecked = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
             
-            setAsSelected(thisPerson: lastPersonChecked)
+            Helper.setAsSelected(thisPerson: lastPersonChecked)
         }
     }
     
@@ -83,10 +83,21 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
             
             let thisPerson = list[indexPath.row]
             
-            setAsSelected(thisPerson: thisPerson)
+            Helper.setAsSelected(thisPerson: thisPerson)
             
             cell.name.text = thisPerson.name
-            cell.information.text = calculateRetirement(person: thisPerson, longForm: false).body
+            
+            var bodyText = ""
+            
+            if Determine.oldEnoughToWork(person: thisPerson) {
+                let answer = Determine.retirement(person: thisPerson, longForm: false)
+                bodyText = answer.body
+            } else {
+                bodyText = "\(Text.ageAlert1) \(thisPerson.age) \(Text.ageAlert2)"
+            }
+            
+            cell.information.text = bodyText
+            
             cell.edit.tag = indexPath.row
             cell.edit.addTarget(self, action: #selector(PeopleViewController.editAction(_:)), for: UIControlEvents.touchUpInside)
             cell.edit.isHidden = false
@@ -111,7 +122,7 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     
     
     func editAction (_ sender: UIButton) {
-        setAsSelected(thisPerson: list[sender.tag])
+        Helper.setAsSelected(thisPerson: list[sender.tag])
         showEditScreen()
     }
     
@@ -128,7 +139,7 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         
         if onTheList(list: list, row: indexPath.row) {
             
-            setAsSelected(thisPerson: list[indexPath.row])
+            Helper.setAsSelected(thisPerson: list[indexPath.row])
             showCalculatedAnswer(person: list[indexPath.row])
             
         } else {
@@ -137,13 +148,13 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
             let newEmployee = Person.init(name: Text.noName, uid: UUID().uuidString, birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: "Not yet eligible.",    percentOfWages: 55.00, wageMultiplier: 2.20, wageYearsRequired: 25)
             
 
-            setAsSelected(thisPerson: newEmployee)
+            Helper.setAsSelected(thisPerson: newEmployee)
 
             People.add(thisPerson: newEmployee)
             showEditScreen()
         }
         
-        persistSelectedEmployee(person: Selected.person)
+        Helper.persistSelectedEmployee(person: Selected.person)
         
         People.persist(ppl: list)
         
@@ -218,8 +229,19 @@ extension PeopleViewController {
     
     func showCalculatedAnswer(person:Person) {
         
-        let fancyText = calculateRetirement(person: person, longForm: true)
-        let alert = UIAlertController(title: fancyText.title, message: fancyText.body, preferredStyle: UIAlertControllerStyle.alert)
+        var bodyText = ""
+        var titleText = ""
+        
+        if Determine.oldEnoughToWork(person: person) {
+            let answer = Determine.retirement(person: person, longForm: true)
+            bodyText = answer.body
+            titleText = answer.title
+        } else {
+            bodyText = "\(Text.ageAlert1) \(person.age) \(Text.ageAlert2)"
+        }
+        
+        
+        let alert = UIAlertController(title: titleText, message: bodyText, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "How Much?", style: UIAlertActionStyle.default) { action in
             self.popUpRates(person: person)
         })
@@ -236,7 +258,7 @@ extension PeopleViewController {
     
     func popUpRates(person:Person) {
         
-        let asrPayRates = "After working \(person.yearsWorked) years your Percentage of Average Monthly Compensation would likely be \(calculateMonthlyCompensation(i:person.yearsWorked)).  Remember, more Service Credits = higher percentage paid. \n5 = 10.50%\n10 = 21.00%\n15 = 31.50%\n20 = 43.00%\n23 = 49.45%\n25 = 55.00%\n27 = 59.40%\n30 = 69.00%\n32 = 73.60%\n\n\(batchText(b: person.batch))"
+        let asrPayRates = "After working \(person.yearsWorked) years your Percentage of Average Monthly Compensation would likely be \(Determine.monthlyCompensation(i:person.yearsWorked)).  Remember, more Service Credits = higher percentage paid. \n5 = 10.50%\n10 = 21.00%\n15 = 31.50%\n20 = 43.00%\n23 = 49.45%\n25 = 55.00%\n27 = 59.40%\n30 = 69.00%\n32 = 73.60%\n\n\(Determine.batchText(b: person.batch))"
         
         let alert = UIAlertController(title: "How Much?", message: asrPayRates, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))

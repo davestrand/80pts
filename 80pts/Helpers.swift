@@ -36,4 +36,57 @@ extension String {
 }
 
 
+public class Helper {
+    //FIXME: Create Class for this so it's not exposed??
+    
+    //Exposed for Today Widget...
+    static func setAsSelected(thisPerson: Person) {
+        
+        Selected.person = thisPerson
+        Selected.id = thisPerson.name //for highlight of selected person
+        
+        dateArray.today = setTodaysDate()
+        dateArray.floating = Selected.person.started
+        
+        Selected.person.age = Determine.ageWhenStarted(person: Selected.person)
+        Selected.person.yearsWorked = 0
+        Selected.person.points = Selected.person.age
+        Selected.person.eligible = false
+        
+        
+        
+    }
+    
+    static func initializeDates (thisPerson: Person) {
+        
+        dateArray.today = setTodaysDate()
+        dateArray.floating = thisPerson.started
+        
+        
+        
+    }
+    
+    
+    
+    
+    static func persistSelectedEmployee (person:Person ) {
+        //https://grokswift.com/notification-center-widget/
+        
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: person)
+        
+        
+        if let defaultGroup = Defaults.group {
+            
+            defaultGroup.set("Group Save Enabled", forKey: "TEST") //TODO: NEEEDED?
+            
+            defaultGroup.set(encodedData, forKey: Key.currentEmployee)
+            
+            defaultGroup.synchronize()
+            
+            
+        }
+    }
+
+}
+
 
