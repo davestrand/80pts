@@ -12,7 +12,6 @@ import Foundation
 
 class Determine {
     
-    
     static func ageWhenStarted(person:Person) -> Int {
         var answer = 0
         let startDate = dateFromArray(arr: person.started)
@@ -20,15 +19,6 @@ class Determine {
         answer = yearDifference(from: bDate, to: startDate)
         return answer
     }
-    
-    
-   /* static func yearsWorked(person:Person) -> Int {
-        let startDate = dateFromArray(arr: person.started)
-        let today = dateFromArray(arr: dateArray.today)
-        let yearsWorked = yearDifference(from: startDate, to: today)
-        return yearsWorked
-    }*/
-    
     
     static func oldEnoughToWork(person:Person) -> Bool {
         if person.age < 14 {
@@ -48,26 +38,6 @@ class Determine {
         }
     }
     
-    
-    static func getBirthdayPoint (person:Person) {
-        dateArray.printableString = dateString(person: person, isBDay: true)
-        person.age = person.age + 1
-        addPoint(person: person)
-    }
-    
-    
-    static func getWorkAnniversaryPoint(person:Person ) {
-        dateArray.printableString = dateString(person: person, isBDay: false)
-        person.yearsWorked = person.yearsWorked + 1
-        addPoint(person: person)
-    }
-    
-    
-    static func addPoint(person:Person) {
-        person.points = person.points + 1
-    }
-    
-    
     static func dateString(person:Person, isBDay:Bool) -> String {
         var answer = ""
         if isBDay {
@@ -79,40 +49,6 @@ class Determine {
         }
         return answer
     }
-    
-    
-    static func addYear() {
-        let thisYear = dateArray.floating[2]
-        let newYear = thisYear + 1
-        dateArray.floating.insert(newYear, at: 2)
-    }
-    
-    
-    static func getPoints(person:Person) {
-        
-        if person.birthdayFirst {
-            
-            getBirthdayPoint(person: person)
-            eligibility(person: person)
-            
-            if !person.eligible {
-                getWorkAnniversaryPoint(person: person)
-                eligibility(person: person)
-            }
-            
-        } else {
-            
-            getWorkAnniversaryPoint(person: person)
-            eligibility(person: person)
-            
-            if !person.eligible {
-                getBirthdayPoint(person: person)
-                eligibility(person: person)
-            }
-        }
-    }
-    
-    
     
     
     static func retirement (person:Person, longForm: Bool) -> (title: String, body: String)  {
@@ -153,12 +89,11 @@ class Determine {
             titleText = "Hunker down \(person.name)!"
         }
         
-        
+    
         var bodyText = ""
         
         if longForm {
-            
-            
+    
             bodyText = ("\(person.name) is eligible to retire at \(person.percentOfWages)% of wages after working \(person.yearsWorked) years at age \(person.age) on \(dateArray.printableString). That is in \(yearsFromToday) years or \(daysFromToday) days from now. If you are still employed, you now have been employed \(yearsFromStartToToday) years. \n\n\(person.reasonEligible)"
             )
             
@@ -167,9 +102,6 @@ class Determine {
             bodyText = ("Can retire on \(dateArray.printableString) at \(person.percentOfWages)% of wages in \(yearsFromToday) years or \(daysFromToday) days from now.")
             
         }
-    
-
-        
         return (titleText,bodyText)
     }
     
@@ -185,7 +117,6 @@ class Determine {
         }
     }
     
-    
     static func batchText (b:Int) -> String {
         
         switch b {
@@ -199,7 +130,6 @@ class Determine {
             return "Batch Unknown"
         }
     }
-    
     
     static func wageIndex (person:Person) -> Double {
         var answer = 0.0
@@ -220,45 +150,31 @@ class Determine {
         
         let index = Int(stepperIndex)
         let newOption = Wage.options[index]
-        
-        
         return newOption
     }
-    
-    
     
     static func monthlyCompensation (i:Int) -> String {
         
         if i < 5 {
             return "0.0%"
-            
         } else if i < 10 {
             return "10.50%"
-            
         } else if i < 15 {
             return "21.00%"
-            
         } else if i < 20 {
             return "31.50%"
-            
         } else if i < 23 {
             return "43.00%"
-            
         } else if i < 25 {
             return "49.45%"
-            
         } else if i < 27 {
             return "55.00%"
-            
         } else if i < 30 {
             return "59.40%"
-            
         } else if i < 32 {
             return "69.00%"
-            
         } else {
             return "73.60%"
-            
         }
     }
     
@@ -317,9 +233,58 @@ class Determine {
             }
         }
     }
-    
-    
 }
+
+
+
+
+
+extension Determine {
+    
+    static func getBirthdayPoint (person:Person) {
+        dateArray.printableString = dateString(person: person, isBDay: true)
+        person.age = person.age + 1
+        addPoint(person: person)
+    }
+    
+    static func getWorkAnniversaryPoint(person:Person ) {
+        dateArray.printableString = dateString(person: person, isBDay: false)
+        person.yearsWorked = person.yearsWorked + 1
+        addPoint(person: person)
+    }
+    
+    static func addPoint(person:Person) {
+        person.points = person.points + 1
+    }
+
+    static func addYear() {
+        let thisYear = dateArray.floating[2]
+        let newYear = thisYear + 1
+        dateArray.floating.insert(newYear, at: 2)
+    }
+    
+    static func getPoints(person:Person) {
+        if person.birthdayFirst {
+            getBirthdayPoint(person: person)
+            eligibility(person: person)
+            if !person.eligible {
+                getWorkAnniversaryPoint(person: person)
+                eligibility(person: person)
+            }
+        } else {
+            getWorkAnniversaryPoint(person: person)
+            eligibility(person: person)
+            if !person.eligible {
+                getBirthdayPoint(person: person)
+                eligibility(person: person)
+            }
+        }
+    }
+}
+
+
+
+
 
 
 

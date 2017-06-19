@@ -72,9 +72,9 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as! PeopleCell
         
-        //let view = UIView()
-       // cell.selectedBackgroundView = view
-        cell.selectionStyle = UITableViewCellSelectionStyle.blue
+        //TODO: Maybe add some color to cell selections.. other than white/grey
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        
 
         
         if onTheList(list:list, row:indexPath.row) {
@@ -136,6 +136,8 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+        
         
         if onTheList(list: list, row: indexPath.row) {
             
