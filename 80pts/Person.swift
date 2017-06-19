@@ -12,6 +12,7 @@ import Foundation
 class Person: NSObject, NSCoding {
     
     var name: String
+    var uid: String
     var birthday: [Int]
     var started: [Int]
     var age: Int
@@ -28,9 +29,10 @@ class Person: NSObject, NSCoding {
     
     
 
-    init(name: String, birthday: [Int], started: [Int], age: Int, points: Int, yearsWorked: Int, birthdayFirst: Bool, pointsNeededToRetire: Int, batch: Int, eligible: Bool, reasonEligible: String, percentOfWages: Double, wageMultiplier: Double, wageYearsRequired: Int) {
+    init(name: String, uid: String, birthday: [Int], started: [Int], age: Int, points: Int, yearsWorked: Int, birthdayFirst: Bool, pointsNeededToRetire: Int, batch: Int, eligible: Bool, reasonEligible: String, percentOfWages: Double, wageMultiplier: Double, wageYearsRequired: Int) {
         
         self.name = name
+        self.uid = uid
         self.birthday = birthday
         self.started = started
         self.age = age
@@ -52,6 +54,7 @@ class Person: NSObject, NSCoding {
         Person.registerClassName()
         
         self.name = aDecoder.decodeObject(forKey: "name") as! String
+        self.uid = aDecoder.decodeObject(forKey: "uid") as! String
         self.birthday = aDecoder.decodeObject(forKey: "birthday") as! [Int]
         self.started = aDecoder.decodeObject(forKey: "started") as! [Int]
         self.age = aDecoder.decodeInteger(forKey: "age")
@@ -72,6 +75,7 @@ class Person: NSObject, NSCoding {
         Person.registerClassName()
                 
         aCoder.encode(name, forKey: "name")
+        aCoder.encode(uid, forKey: "uid")
         aCoder.encode(birthday, forKey: "birthday")
         aCoder.encode(started, forKey: "started")
         aCoder.encode(age, forKey: "age")
@@ -110,7 +114,7 @@ extension NSCoding {
 func setAsSelected(thisPerson: Person) {
     
     Selected.person = thisPerson
-    Selected.id = thisPerson.name
+    Selected.id = thisPerson.name //for highlight of selected person
     
     dateArray.today = setTodaysDate()
     dateArray.floating = Selected.person.started
@@ -130,16 +134,22 @@ func initializeDates (thisPerson: Person) {
     dateArray.floating = thisPerson.started
     
     
+    
 }
 
+func uidReturn () ->String {
+    let uid = UUID().uuidString
+    return uid
+}
 
 
 public class Selected {
     
-    static var id = ""
-    
+    static var id = "" //TODO: Move this to UID for selection too.
+
     static var person = Person(name: "David Levy",
-    birthday: [10,20,1974],
+        uid: uidReturn(), //FIXME: Replace with random
+        birthday: [10,20,1974],
     started: [1,5,2005],
     age: 0,
     points: 0,

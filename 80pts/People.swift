@@ -47,13 +47,20 @@ class People: NSObject, NSCoding {
         
         }
     
-    static func duplicateName(name: String) -> Int {
+    static func duplicateName(person: Person) -> Int {
         
         var answer = 0
         
         for each in list {
             
-            if each.name.charsOnly().uppercased() == name.charsOnly().uppercased() { //same name?
+
+            if each.uid != person.uid {
+            
+            print("this name is \(each.name)")
+            print("this uid is \(each.uid)")
+            print("selected person is \(Selected.person.uid)")
+            
+            if each.name.charsOnly().uppercased() == person.name.charsOnly().uppercased() { //same name?
                 answer = 2 //well then there's at least one other
 
                 if let lastChar = each.name.characters.last {
@@ -66,6 +73,7 @@ class People: NSObject, NSCoding {
                 }
                 }
             }
+        }
         return answer
     }
 

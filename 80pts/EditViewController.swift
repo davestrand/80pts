@@ -55,9 +55,11 @@ extension EditViewController: UITextFieldDelegate {
         nameBlocker.isHidden = true
         nameField.resignFirstResponder()
 
-        let countedDuplicateNames = People.duplicateName(name: tempName)
+        let countedDuplicateNames = People.duplicateName(person: Selected.person)
         
-        if countedDuplicateNames > 0  {
+        
+        
+        if countedDuplicateNames >= 1  {
             tempName = "\(tempName) \(countedDuplicateNames)"
         }
         
@@ -86,6 +88,9 @@ extension EditViewController: UITextFieldDelegate {
             nameBlocker.isHidden = true
         }
         
+        nameField.backgroundColor = UIColor.white
+        nameField.textColor = UIColor.black
+        
         wagesReplacedLabel.text = "Wages: \(Selected.person.percentOfWages)%"
         wagesReplacedStepper.minimumValue = 0.0
         wagesReplacedStepper.maximumValue = Double(Wage.options.count) - 1
@@ -103,6 +108,9 @@ extension EditViewController: UITextFieldDelegate {
         startDayPicker.maximumDate = dateFromArray(arr: dateArray.today)
         
         UIApplication.shared.statusBarStyle = .default
+        
+        view.backgroundColor = Colors.cellBackgroundNormal
+
     }
     
 

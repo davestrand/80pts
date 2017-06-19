@@ -133,8 +133,12 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
             
         } else {
             
-            let newEmployee = Person.init(name: Text.noName, birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: "Not yet eligible.",    percentOfWages: 55.00, wageMultiplier: 2.20, wageYearsRequired: 25)
+
+            let newEmployee = Person.init(name: Text.noName, uid: UUID().uuidString, birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: "Not yet eligible.",    percentOfWages: 55.00, wageMultiplier: 2.20, wageYearsRequired: 25)
+            
+
             setAsSelected(thisPerson: newEmployee)
+
             People.add(thisPerson: newEmployee)
             showEditScreen()
         }
