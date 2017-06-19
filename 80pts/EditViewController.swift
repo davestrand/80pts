@@ -49,13 +49,13 @@ extension EditViewController: UITextFieldDelegate {
 
     }
     
-    func nameEditEnd () {
+    func nameEditEnd (nameAttempt: String) {
 
         
         nameBlocker.isHidden = true
         nameField.resignFirstResponder()
 
-        let countedDuplicateNames = People.duplicateName(person: Selected.person)
+        let countedDuplicateNames = People.duplicateName(testString: nameAttempt)
         
         
         
@@ -134,7 +134,7 @@ extension EditViewController: UITextFieldDelegate {
     
     @IBAction func blockerTouched(_ sender: Any) {
         
-        nameEditEnd()
+        nameEditEnd(nameAttempt: tempName)
         
     }
     
@@ -179,7 +179,7 @@ extension EditViewController: UITextFieldDelegate {
         
         tempName = textField.text ?? ""
     
-        nameEditEnd()
+        nameEditEnd(nameAttempt: tempName)
         
        
         return true

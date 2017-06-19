@@ -230,7 +230,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIG-iG-j09">
-                                <rect key="frame" x="16" y="8" width="22" height="22"/>
+                                <rect key="frame" x="16" y="20" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="Zyg-OR-S6H"/>
                                 </constraints>
@@ -239,7 +239,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilx-d7-Euo">
-                                <rect key="frame" x="243" y="8" width="61" height="33"/>
+                                <rect key="frame" x="243" y="20" width="61" height="33"/>
                                 <fontDescription key="fontDescription" name="MalayalamSangamMN" family="Malayalam Sangam MN" pointSize="17"/>
                                 <state key="normal" title="Benefits">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -249,7 +249,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5t-JR-JT1">
-                                <rect key="frame" x="123" y="8" width="74" height="33"/>
+                                <rect key="frame" x="123" y="20" width="74" height="33"/>
                                 <fontDescription key="fontDescription" name="MalayalamSangamMN" family="Malayalam Sangam MN" pointSize="17"/>
                                 <state key="normal" title="Rules">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -264,14 +264,14 @@
                             <constraint firstItem="i5t-JR-JT1" firstAttribute="leading" secondItem="uIG-iG-j09" secondAttribute="trailing" constant="85" id="0ZZ-vl-rhh"/>
                             <constraint firstItem="i5t-JR-JT1" firstAttribute="baseline" secondItem="ilx-d7-Euo" secondAttribute="baseline" id="6id-uE-88N"/>
                             <constraint firstItem="uIG-iG-j09" firstAttribute="leading" secondItem="iOS-jI-3e5" secondAttribute="leadingMargin" id="81x-eV-ici"/>
-                            <constraint firstItem="kxE-U3-33h" firstAttribute="top" secondItem="uIG-iG-j09" secondAttribute="bottom" constant="19" id="DHv-Qh-f4P"/>
+                            <constraint firstItem="kxE-U3-33h" firstAttribute="top" secondItem="uIG-iG-j09" secondAttribute="bottom" constant="7" id="DHv-Qh-f4P"/>
                             <constraint firstItem="uIG-iG-j09" firstAttribute="top" secondItem="i5t-JR-JT1" secondAttribute="top" id="LSi-bi-Tp4"/>
                             <constraint firstItem="i5t-JR-JT1" firstAttribute="centerX" secondItem="kxE-U3-33h" secondAttribute="centerX" id="T5t-Nq-lUB"/>
                             <constraint firstItem="kxE-U3-33h" firstAttribute="leading" secondItem="iOS-jI-3e5" secondAttribute="leading" id="VFw-RZ-nP4"/>
                             <constraint firstAttribute="trailing" secondItem="kxE-U3-33h" secondAttribute="trailing" id="dP7-Ql-LIj"/>
                             <constraint firstItem="ilx-d7-Euo" firstAttribute="trailing" secondItem="iOS-jI-3e5" secondAttribute="trailingMargin" id="eLE-lv-fzG"/>
                             <constraint firstItem="kxE-U3-33h" firstAttribute="bottom" secondItem="MlJ-5S-9m6" secondAttribute="top" id="gwI-iU-h2Y"/>
-                            <constraint firstItem="uIG-iG-j09" firstAttribute="top" secondItem="sjs-wl-KMV" secondAttribute="bottom" constant="8" id="yOa-M8-L2Q"/>
+                            <constraint firstItem="uIG-iG-j09" firstAttribute="top" secondItem="sjs-wl-KMV" secondAttribute="bottom" constant="20" id="yOa-M8-L2Q"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>

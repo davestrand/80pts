@@ -47,34 +47,48 @@ class People: NSObject, NSCoding {
         
         }
     
-    static func duplicateName(person: Person) -> Int {
+    static func duplicateName(testString: String) -> Int {
         
         var answer = 0
         
-        for each in list {
+        for eachPerson in list {
             
+            if sameString(a: eachPerson.name, b: testString) {
+            
+                if !sameString(a: eachPerson.uid, b: Selected.person.uid) {
 
-            if each.uid != person.uid {
-            
-            print("this name is \(each.name)")
-            print("this uid is \(each.uid)")
-            print("selected person is \(Selected.person.uid)")
-            
-            if each.name.charsOnly().uppercased() == person.name.charsOnly().uppercased() { //same name?
-                answer = 2 //well then there's at least one other
-
-                if let lastChar = each.name.characters.last {
+                answer = 2 //well then there's at least one other 
+                    
+                    //now let's find what number to tack onto the end.
+                if let lastChar = eachPerson.name.characters.last {
                     if let lastNum = Int(String(lastChar)) {
                         if lastNum >= answer {
                             answer = lastNum + 1
-                
+                        }
                         }
                     }
-                }
+                
+                
                 }
             }
         }
         return answer
+    }
+    
+    static func sameString (a:String, b:String) -> Bool {
+        
+        var answer = false
+        
+        let aa = a.trimmingCharacters(in: .whitespaces)
+        let bb = b.trimmingCharacters(in: .whitespaces)
+
+        
+        if aa.uppercased() == bb.uppercased() {
+            answer = true
+        }
+        
+        return answer
+        
     }
 
     static func persist (ppl:[Person]) {
