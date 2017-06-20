@@ -34,7 +34,7 @@ class PeopleViewController: UIViewController{
 
     override func viewWillAppear(_ animated: Bool) {
         
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
     }
     
@@ -203,12 +203,35 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     }
     
     
-    @IBAction func popRate(_ sender: Any) {
+    func popBenefits() {
         if let url = NSURL(string: "https://www.azasrs.gov/content/estimate-your-benefits"){ UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) }
     }
     
-    @IBAction func popSite(_ sender: Any) {
+    func popEligibility() {
         if let url = NSURL(string: "https://www.azasrs.gov/content/retirement-eligibility"){ UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) }
+    }
+    
+    @IBAction func popOfficialOptions(_ sender: Any) {
+        
+        
+        let bodyText = "Here are some links to official ASRS web pages."
+        
+        let alert = UIAlertController(title: "Official ASRS Webpages", message: bodyText, preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "Estimate Benefits", style: UIAlertActionStyle.default) { action in
+            self.popBenefits()
+            
+        })
+        alert.addAction(UIAlertAction(title: "Retirement Eligibility", style: UIAlertActionStyle.default) { action in
+            self.popEligibility()
+            
+        })
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+
+        
+        
     }
     
     @IBAction func popInfo(_ sender: Any) {
