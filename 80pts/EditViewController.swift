@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class EditViewController: UIViewController {
     @IBOutlet weak var birthdayLabel: UILabel!
     @IBOutlet weak var birthdayPicker: UIDatePicker!

@@ -6,6 +6,11 @@
 //  Copyright © 2017 mcc. All rights reserved.
 //
 
+
+//TODO: Enable gaps of employment option.  So you can add years missed working.
+//TODO: Maybe a little meter on the PeopleView for each person.
+
+
 import UIKit
 
 class PeopleViewController: UIViewController{
