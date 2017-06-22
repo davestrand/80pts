@@ -25,6 +25,8 @@
 		F3D1A6BF1EF87FC200AAA633 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D1A6BB1EEA0A8900AAA633 /* Helpers.swift */; };
 		F3D1A6C11EFC636300AAA633 /* Wage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D1A6C01EFC636300AAA633 /* Wage.swift */; };
 		F3D1A6C21EFC652A00AAA633 /* Wage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D1A6C01EFC636300AAA633 /* Wage.swift */; };
+		F3D1A6C41EFC766B00AAA633 /* SelectedPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D1A6C31EFC766B00AAA633 /* SelectedPerson.swift */; };
+		F3D1A6C51EFC769B00AAA633 /* SelectedPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D1A6C31EFC766B00AAA633 /* SelectedPerson.swift */; };
 		F3D954BB1E0AFC4600D33A6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D954BA1E0AFC4600D33A6F /* AppDelegate.swift */; };
 		F3D954BD1E0AFC4600D33A6F /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D954BC1E0AFC4600D33A6F /* EditViewController.swift */; };
 		F3D954C01E0AFC4600D33A6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3D954BE1E0AFC4600D33A6F /* Main.storyboard */; };
@@ -89,6 +91,7 @@
 		F3D1A6B91EE9B88700AAA633 /* PeopleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleCell.swift; sourceTree = "<group>"; };
 		F3D1A6BB1EEA0A8900AAA633 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		F3D1A6C01EFC636300AAA633 /* Wage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wage.swift; sourceTree = "<group>"; };
+		F3D1A6C31EFC766B00AAA633 /* SelectedPerson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedPerson.swift; sourceTree = "<group>"; };
 		F3D954B71E0AFC4600D33A6F /* 80pts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 80pts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D954BA1E0AFC4600D33A6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3D954BC1E0AFC4600D33A6F /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +163,20 @@
 			path = 80ptsExtension;
 			sourceTree = "<group>";
 		};
+		F3D1A6C61EFC770900AAA633 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F3D954BE1E0AFC4600D33A6F /* Main.storyboard */,
+				F3D954C31E0AFC4600D33A6F /* LaunchScreen.storyboard */,
+				F3D954BC1E0AFC4600D33A6F /* EditViewController.swift */,
+				F39258FF1EE87A100062BA03 /* PeopleViewController.swift */,
+				F3D1A6B91EE9B88700AAA633 /* PeopleCell.swift */,
+				F3D954BA1E0AFC4600D33A6F /* AppDelegate.swift */,
+				F3D954C61E0AFC4600D33A6F /* Info.plist */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		F3D954AE1E0AFC4500D33A6F = {
 			isa = PBXGroup;
 			children = (
@@ -187,22 +204,17 @@
 			isa = PBXGroup;
 			children = (
 				F39258EA1EE60DB10062BA03 /* 80pts.entitlements */,
-				F3D954BE1E0AFC4600D33A6F /* Main.storyboard */,
 				F3D954C11E0AFC4600D33A6F /* Assets.xcassets */,
+				F3D1A6C61EFC770900AAA633 /* View */,
 				F39258F61EE72D0F0062BA03 /* Constants.swift */,
-				F3D954BC1E0AFC4600D33A6F /* EditViewController.swift */,
-				F39258FF1EE87A100062BA03 /* PeopleViewController.swift */,
-				F3D1A6B91EE9B88700AAA633 /* PeopleCell.swift */,
 				F3D1A6C01EFC636300AAA633 /* Wage.swift */,
 				F39258FD1EE770960062BA03 /* People.swift */,
 				F3F2F4A11E0C29ED00DC722F /* Person.swift */,
+				F3D1A6C31EFC766B00AAA633 /* SelectedPerson.swift */,
 				F3D1A6BB1EEA0A8900AAA633 /* Helpers.swift */,
 				F3F2F4A31E0C36A500DC722F /* Date.swift */,
 				F3F2F4A51E0C3D1300DC722F /* Rules.swift */,
 				F3D954E81E0AFC7700D33A6F /* Determine.swift */,
-				F3D954BA1E0AFC4600D33A6F /* AppDelegate.swift */,
-				F3D954C61E0AFC4600D33A6F /* Info.plist */,
-				F3D954C31E0AFC4600D33A6F /* LaunchScreen.storyboard */,
 			);
 			path = 80pts;
 			sourceTree = "<group>";
@@ -413,6 +425,7 @@
 				F39258E61EE096EA0062BA03 /* Date.swift in Sources */,
 				F39258E81EE096F10062BA03 /* Determine.swift in Sources */,
 				F39258F81EE72DF60062BA03 /* Constants.swift in Sources */,
+				F3D1A6C51EFC769B00AAA633 /* SelectedPerson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +435,7 @@
 			files = (
 				F3D954BD1E0AFC4600D33A6F /* EditViewController.swift in Sources */,
 				F3D1A6C11EFC636300AAA633 /* Wage.swift in Sources */,
+				F3D1A6C41EFC766B00AAA633 /* SelectedPerson.swift in Sources */,
 				F3F2F4A41E0C36A500DC722F /* Date.swift in Sources */,
 				F3D1A6BA1EE9B88700AAA633 /* PeopleCell.swift in Sources */,
 				F3D954E91E0AFC7700D33A6F /* Determine.swift in Sources */,

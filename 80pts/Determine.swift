@@ -121,13 +121,13 @@ struct Determine {
         
         switch b {
         case Batch.first.rawValue:
-            return "\(BatchData.firstText)"
+            return Text.rulesBatch1
         case Batch.second.rawValue:
-            return "\(BatchData.secondText)"
+            return Text.rulesBatch2
         case Batch.third.rawValue:
-            return "\(BatchData.thirdText)"
+            return Text.rulesBatch3
         default:
-            return "Batch Unknown"
+            return Text.rulesBatchUnknown
         }
     }
     

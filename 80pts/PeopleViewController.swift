@@ -25,20 +25,14 @@ class PeopleViewController: UIViewController{
         Defaults.group?.synchronize()
         Person.registerClassName()
         loadPeople()
-        
-        
-
-        
-        
+ 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         refreshTable()
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
     }
@@ -50,7 +44,6 @@ class PeopleViewController: UIViewController{
     }
     
     func assignSelectedName ()  {
-        
         if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let lastPersonChecked = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
             
             Helper.setAsSelected(thisPerson: lastPersonChecked)
@@ -58,7 +51,6 @@ class PeopleViewController: UIViewController{
     }
     
     func loadPeople() {
-        
         if let data =  Defaults.group?.data(forKey: Key.people), let thesePeople = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Person] {
             ppl = thesePeople
         }
@@ -69,10 +61,8 @@ class PeopleViewController: UIViewController{
 extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return ppl.count + 1
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as! PeopleCell
@@ -80,18 +70,11 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         //TODO: Maybe add some color to cell selections.. other than white/grey
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         
-
-        
         if personExists(from:indexPath.row, in:ppl) {
             
-        
-            
             let thisPerson = ppl[indexPath.row]
-            
             Helper.setAsSelected(thisPerson: thisPerson)
-            
             cell.name.text = thisPerson.name
-            
             var bodyText = ""
             
             if Determine.oldEnoughToWork(person: thisPerson) {
@@ -102,26 +85,22 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
             }
             
             cell.information.text = bodyText
-            
             cell.edit.tag = indexPath.row
             cell.edit.addTarget(self, action: #selector(PeopleViewController.editAction(_:)), for: UIControlEvents.touchUpInside)
             cell.edit.isHidden = false
             cell.backgroundColor = Colors.cellBackgroundNormal
 
-            
         } else {
             
             cell.name.text = Text.createNew
             cell.information.text = ""
             cell.edit.isHidden = true
             cell.backgroundColor = Colors.cellBackgroundCreateNew
-
         }
         
         if cell.name.text == tempNameString {
             cell.backgroundColor = Colors.cellBackgroundSelected
         }
-        
         return cell
     }
     
@@ -132,7 +111,6 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     }
     
     func personExists (from row:Int, in ppl:[Person]) -> Bool {
-        
         if row < ppl.count {
             return true
         } else {
@@ -141,32 +119,20 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-        
-        
         if personExists(from:indexPath.row, in:ppl) {
-            
             Helper.setAsSelected(thisPerson: ppl[indexPath.row])
             showCalculatedAnswer(person: ppl[indexPath.row])
-            
         } else {
-            
-
             let newEmployee = Person.init(name: Text.noName, uid: UUID().uuidString, birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: Text.notYetEligible,    percentOfWages: 55.00, wageMultiplier: 2.20, wageYearsRequired: 25)
             
-
             Helper.setAsSelected(thisPerson: newEmployee)
-
             People.add(thisPerson: newEmployee)
             showEditScreen()
         }
         
         Helper.persistSelectedEmployee(person: Selected.person)
-        
         People.persist(ppl: ppl)
-        
         pplView.reloadData()
-        
         refreshTable()
     }
     
@@ -177,7 +143,6 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            
             
             if personExists(from:indexPath.row, in:ppl) {
                 
@@ -202,6 +167,13 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         
         navigationController?.pushViewController(detailedView, animated: true)
     }
+    
+    
+    func popWebpage(urlString:String) {
+        if let url = NSURL(string: urlString){ UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) }
+    }
+    
+
     
     
     func popBenefits() {

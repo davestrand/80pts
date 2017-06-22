@@ -30,18 +30,25 @@ struct Text {
     static let ok = "OK"
     static let howMuch = "How Much?"
     
+    
     static let infoTitle = "80 Points V"
     static let infoBody = "An app by David Levy to calculate Arizona State Retirement eligibility based on the information provided on the official ASRS website. THIS IS NOT AN OFFICIAL ASRS TOOL, and any calculations or estimations provided here should be verified with your Human Resources department and official resources."
+    
     
     static let ageWarnTitle = "Hmm."
     static let ageWarnBody1 = "Your starting age is"
     static let ageWarnBody2 = "which is not old enough to work in Arizona.  Please check both dates to be sure they are accurate."
+    
     
     static let ratesBody1 = "After working "
     static let ratesBody2 = " years your Percentage of Average Monthly Compensation would likely be "
     static let ratesBody3 = ".  Remember, more Service Credits = higher percentage paid. \n5 = 10.50%\n10 = 21.00%\n15 = 31.50%\n20 = 43.00%\n23 = 49.45%\n25 = 55.00%\n27 = 59.40%\n30 = 69.00%\n32 = 73.60%\n\n"
 
     
+    static let rulesBatch1 = "Since your start date was prior to January 1, 1984 your Average Monthly Compensation is calculated by taking the highest consecutive 60 months of contributions within the last 120 months of contributions reported to the ASRS, which could span more than 10 calendar years. Payments made as a result of termination of employment (Termination Pay) such as vacation/annual leave, sick leave, termination incentive payments, etc., are included in the calculation, with exceptions."
+    static let rulesBatch2 = "Since your start date was between January 1, 1984 and June 30, 2011 your Average Monthly Compensation is calculated by taking the highest consecutive 36 months of contributions within the last 120 months of contributions reported to the ASRS, which could span more than 10 calendar years. Termination Pay is excluded."
+    static let rulesBatch3 = "Since your start date was after June 30, 2011 your Average Monthly Compensation is calculated by taking the highest consecutive 60 months of contributions within the last 120 months of contributions reported to the ASRS, which could span more than 10 calendar years. Termination pay is excluded."
+    static let rulesBatchUnknown = "Batch Unknown"
     
 }
 
