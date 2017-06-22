@@ -10,13 +10,13 @@ import Foundation
 
 
 
-class Determine {
+struct Determine {
     
     static func ageWhenStarted(person:Person) -> Int {
         var answer = 0
-        let startDate = dateFromArray(arr: person.started)
-        let bDate = dateFromArray(arr: person.birthday)
-        answer = yearDifference(from: bDate, to: startDate)
+        let startDate = Dates.dateFromArray(arr: person.started)
+        let bDate = Dates.dateFromArray(arr: person.birthday)
+        answer = Dates.yearDifference(from: bDate, to: startDate)
         return answer
     }
     
@@ -62,12 +62,12 @@ class Determine {
         }
         
         // now format an answer
-        let finalDate = dateFromArray(arr: dateArray.printable)
-        let startDate = dateFromArray(arr: person.started)
-        let today = dateFromArray(arr: dateArray.today)
-        let daysFromToday = dayDifference(from: today, to: finalDate)
-        let yearsFromToday = yearDifference(from: today, to: finalDate)
-        let yearsFromStartToToday = yearDifference(from: startDate, to: today)
+        let finalDate = Dates.dateFromArray(arr: dateArray.printable)
+        let startDate = Dates.dateFromArray(arr: person.started)
+        let today = Dates.dateFromArray(arr: dateArray.today)
+        let daysFromToday = Dates.dayDifference(from: today, to: finalDate)
+        let yearsFromToday = Dates.yearDifference(from: today, to: finalDate)
+        let yearsFromStartToToday = Dates.yearDifference(from: startDate, to: today)
         
         var titleText = "Calculated!"
         

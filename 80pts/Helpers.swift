@@ -36,7 +36,7 @@ extension String {
 }
 
 
-public class Helper {
+struct Helper {
     //FIXME: Create Class for this so it's not exposed??
     
     //Exposed for Today Widget...
@@ -45,7 +45,7 @@ public class Helper {
         Selected.person = thisPerson
         Selected.id = thisPerson.name //for highlight of selected person
         
-        dateArray.today = setTodaysDate()
+        dateArray.today = Dates.setTodaysDate()
         dateArray.floating = Selected.person.started
         
         Selected.person.age = Determine.ageWhenStarted(person: Selected.person)
@@ -59,7 +59,7 @@ public class Helper {
     
     static func initializeDates (thisPerson: Person) {
         
-        dateArray.today = setTodaysDate()
+        dateArray.today = Dates.setTodaysDate()
         dateArray.floating = thisPerson.started
         
         
@@ -89,4 +89,14 @@ public class Helper {
 
 }
 
+
+//This is added because the extension wasn't properly reading my custom Person class.
+//https://stackoverflow.com/questions/43864708/nskeyedunarchiver-unarchiveobject-fails-with-an-error-when-picking-data-from-use
+extension NSCoding {
+    static func registerClassName() {
+        let className = NSStringFromClass(self).components(separatedBy: ".").last!
+        NSKeyedArchiver.setClassName(className, for: self)
+        NSKeyedUnarchiver.setClass(self, forClassName: className)
+    }
+}
 

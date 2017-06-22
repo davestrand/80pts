@@ -8,6 +8,7 @@
 import UIKit
 
 class EditViewController: UIViewController {
+   
     @IBOutlet weak var birthdayLabel: UILabel!
     @IBOutlet weak var birthdayPicker: UIDatePicker!
     @IBOutlet weak var startDayLabel: UILabel!
@@ -98,13 +99,13 @@ extension EditViewController: UITextFieldDelegate {
         birthdayPicker.backgroundColor = UIColor.white
         birthdayPicker.setValue(UIColor.black, forKeyPath: "textColor")
         birthdayPicker.setValue(1.0, forKeyPath: "alpha")
-        birthdayPicker.setDate( dateFromArray(arr: Selected.person.birthday), animated: true)
+        birthdayPicker.setDate( Dates.dateFromArray(arr: Selected.person.birthday), animated: true)
         
         startDayPicker.backgroundColor = UIColor.white
         startDayPicker.setValue(UIColor.black, forKeyPath: "textColor")
         startDayPicker.setValue(1.0, forKeyPath: "alpha")
-        startDayPicker.setDate( dateFromArray(arr: Selected.person.started), animated: true)
-        startDayPicker.maximumDate = dateFromArray(arr: dateArray.today)
+        startDayPicker.setDate( Dates.dateFromArray(arr: Selected.person.started), animated: true)
+        startDayPicker.maximumDate = Dates.dateFromArray(arr: dateArray.today)
         
         UIApplication.shared.statusBarStyle = .default
         
@@ -163,7 +164,7 @@ extension EditViewController: UITextFieldDelegate {
         let longStrArray = longDate.components(separatedBy:" ")
 
         Selected.person.started = [Int(shortStrArray[0])!, Int(shortStrArray[1])!, Int(longStrArray[2])! ]
-        Selected.person.batch = Determine.batch(hireDate: dateFromArray(arr: Selected.person.started))
+        Selected.person.batch = Determine.batch(hireDate: Dates.dateFromArray(arr: Selected.person.started))
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -187,7 +188,7 @@ extension EditViewController: UITextFieldDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         
         Helper.persistSelectedEmployee(person: Selected.person)
-        People.persist(ppl: list)
+        People.persist(ppl: ppl)
 
     }
     

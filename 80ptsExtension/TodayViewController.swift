@@ -6,7 +6,6 @@
 //  Copyright © 2017 mcc. All rights reserved.
 //
 
-import UIKit
 import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {

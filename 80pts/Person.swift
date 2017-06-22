@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class Person: NSObject, NSCoding {
     
     var name: String
@@ -98,20 +97,7 @@ class Person: NSObject, NSCoding {
 
 
 
-//This is added because the extension wasn't properly reading my custom Person class.
-//https://stackoverflow.com/questions/43864708/nskeyedunarchiver-unarchiveobject-fails-with-an-error-when-picking-data-from-use
-extension NSCoding {
-    static func registerClassName() {
-        let className = NSStringFromClass(self).components(separatedBy: ".").last!
-        NSKeyedArchiver.setClassName(className, for: self)
-        NSKeyedUnarchiver.setClass(self, forClassName: className)
-    }
-}
-
-
-
 public class Selected {
-    
     
     static var id = "" //TODO: Move this to UID for selection too.
     

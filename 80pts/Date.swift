@@ -23,46 +23,48 @@ struct DateArray: Data {
     var floating: [Int]
     var printable: [Int]
     var printableString: String
-
+    
 }
 
 
-
-func dateFromArray(arr:[Int]) -> Date {
-    let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)
-    let components = NSDateComponents()
-    components.month = arr[0]
-    components.day = arr[1]
-    components.year = arr[2]
-    let date = calendar?.date(from: components as DateComponents)
-    return date!
+struct Dates {
+    
+    static func dateFromArray(arr:[Int]) -> Date {
+        let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)
+        let components = NSDateComponents()
+        components.month = arr[0]
+        components.day = arr[1]
+        components.year = arr[2]
+        let date = calendar?.date(from: components as DateComponents)
+        return date!
+    }
+    
+    static func setTodaysDate () -> [Int] {
+        let date = NSDate()
+        let calendar = NSCalendar.current
+        let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: date as Date)
+        let day = components.day
+        let month = components.month
+        let year = components.year
+        return [month!, day!, year!]
+    }
+    
+    static func dayDifference(from: Date, to: Date) -> Int {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([Calendar.Component.day], from: from, to: to)
+        return components.day!
+    }
+    
+    static func monthDifference(from: Date, to: Date) -> Int {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([Calendar.Component.month], from: from, to: to)
+        return components.month!
+    }
+    
+    static func yearDifference(from: Date, to: Date) -> Int {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([Calendar.Component.year], from: from, to: to)
+        return components.year!
+    }
+    
 }
-
-func setTodaysDate () -> [Int] {
-    let date = NSDate()
-    let calendar = NSCalendar.current
-    let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: date as Date)
-    let day = components.day
-    let month = components.month
-    let year = components.year
-    return [month!, day!, year!]
-}
-
-func dayDifference(from: Date, to: Date) -> Int {
-    let calendar = Calendar.current
-    let components = calendar.dateComponents([Calendar.Component.day], from: from, to: to)
-    return components.day!
-}
-
-func monthDifference(from: Date, to: Date) -> Int {
-    let calendar = Calendar.current
-    let components = calendar.dateComponents([Calendar.Component.month], from: from, to: to)
-    return components.month!
-}
-
-func yearDifference(from: Date, to: Date) -> Int {
-    let calendar = Calendar.current
-    let components = calendar.dateComponents([Calendar.Component.year], from: from, to: to)
-    return components.year!
-}
-

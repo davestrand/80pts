@@ -60,7 +60,7 @@ class PeopleViewController: UIViewController{
     func loadPeople() {
         
         if let data =  Defaults.group?.data(forKey: Key.people), let thesePeople = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Person] {
-            list = thesePeople
+            ppl = thesePeople
         }
         pplView.reloadData()
     }
@@ -70,7 +70,7 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return list.count + 1
+        return ppl.count + 1
     }
     
     
@@ -82,11 +82,11 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         
 
         
-        if onTheList(list:list, row:indexPath.row) {
+        if personExists(from:indexPath.row, in:ppl) {
             
         
             
-            let thisPerson = list[indexPath.row]
+            let thisPerson = ppl[indexPath.row]
             
             Helper.setAsSelected(thisPerson: thisPerson)
             
@@ -127,13 +127,13 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     
     
     func editAction (_ sender: UIButton) {
-        Helper.setAsSelected(thisPerson: list[sender.tag])
+        Helper.setAsSelected(thisPerson: ppl[sender.tag])
         showEditScreen()
     }
     
-    func onTheList (list:[Person], row:Int) -> Bool {
+    func personExists (from row:Int, in ppl:[Person]) -> Bool {
         
-        if row < list.count {
+        if row < ppl.count {
             return true
         } else {
             return false
@@ -144,15 +144,15 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
        
         
         
-        if onTheList(list: list, row: indexPath.row) {
+        if personExists(from:indexPath.row, in:ppl) {
             
-            Helper.setAsSelected(thisPerson: list[indexPath.row])
-            showCalculatedAnswer(person: list[indexPath.row])
+            Helper.setAsSelected(thisPerson: ppl[indexPath.row])
+            showCalculatedAnswer(person: ppl[indexPath.row])
             
         } else {
             
 
-            let newEmployee = Person.init(name: Text.noName, uid: UUID().uuidString, birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: "Not yet eligible.",    percentOfWages: 55.00, wageMultiplier: 2.20, wageYearsRequired: 25)
+            let newEmployee = Person.init(name: Text.noName, uid: UUID().uuidString, birthday: [10,20,1974], started: [1,5,2005], age: 0, points: 0, yearsWorked: 0, birthdayFirst: false, pointsNeededToRetire: 80, batch: 3, eligible: false, reasonEligible: Text.notYetEligible,    percentOfWages: 55.00, wageMultiplier: 2.20, wageYearsRequired: 25)
             
 
             Helper.setAsSelected(thisPerson: newEmployee)
@@ -163,7 +163,7 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         
         Helper.persistSelectedEmployee(person: Selected.person)
         
-        People.persist(ppl: list)
+        People.persist(ppl: ppl)
         
         pplView.reloadData()
         
@@ -179,19 +179,15 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             
             
-            if onTheList(list: list, row: indexPath.row) {
+            if personExists(from:indexPath.row, in:ppl) {
                 
-                list.remove(at: indexPath.row)
+                ppl.remove(at: indexPath.row)
             
                 tableView.beginUpdates()
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 tableView.endUpdates()
-
             
             }
-            
-            //tableView.reloadData()
-
         }
     }
     
@@ -201,7 +197,7 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         let detailedView = storyBoard.instantiateViewController(withIdentifier: "edit") as! EditViewController
         
         let backItem = UIBarButtonItem()
-        backItem.title = "Save and Exit"
+        backItem.title = Text.saveAndExit
         navigationItem.backBarButtonItem = backItem
         
         navigationController?.pushViewController(detailedView, animated: true)
@@ -209,30 +205,30 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     
     
     func popBenefits() {
-        if let url = NSURL(string: "https://www.azasrs.gov/content/estimate-your-benefits"){ UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) }
+        if let url = NSURL(string: Key.urlBenefits){ UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) }
     }
     
     func popEligibility() {
-        if let url = NSURL(string: "https://www.azasrs.gov/content/retirement-eligibility"){ UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) }
+        if let url = NSURL(string: Key.urlEligibility){ UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) }
     }
     
     @IBAction func popOfficialOptions(_ sender: Any) {
         
         
-        let bodyText = "Here are some links to official ASRS web pages."
+        let bodyText = Text.linksBody
         
-        let alert = UIAlertController(title: "Official ASRS Webpages", message: bodyText, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: Text.linksTitle, message: bodyText, preferredStyle: UIAlertControllerStyle.alert)
         
-        alert.addAction(UIAlertAction(title: "Estimate Benefits", style: UIAlertActionStyle.default) { action in
+        alert.addAction(UIAlertAction(title: Text.linkBenefits, style: UIAlertActionStyle.default) { action in
             self.popBenefits()
             
         })
-        alert.addAction(UIAlertAction(title: "Retirement Eligibility", style: UIAlertActionStyle.default) { action in
+        alert.addAction(UIAlertAction(title: Text.linkEligibility, style: UIAlertActionStyle.default) { action in
             self.popEligibility()
             
         })
         
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
 
         
@@ -248,8 +244,8 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         }
         
         
-        let alert = UIAlertController(title: "80 Points V\(version)", message: "An app by David Levy to calculate Arizona State Retirement eligibility based on the information provided on the official ASRS website. THIS IS NOT AN OFFICIAL ASRS TOOL, and any calculations or estimations provided here should be verified with your Human Resources department and official resources. ", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: Text.infoTitle + "\(version)", message: Text.infoBody, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }
@@ -272,26 +268,26 @@ extension PeopleViewController {
         
         
         let alert = UIAlertController(title: titleText, message: bodyText, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "How Much?", style: UIAlertActionStyle.default) { action in
+        alert.addAction(UIAlertAction(title: Text.howMuch, style: UIAlertActionStyle.default) { action in
             self.popUpRates(person: person)
         })
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
     }
     
     func showAgeWarning(person:Person) {
-        let alert = UIAlertController(title: "Hmm.", message: "Your starting age is \(person.age) which is not old enough to work in Arizona.  Please check both dates to be sure they are accurate.", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: Text.ageWarnTitle, message: "\(Text.ageWarnBody1) \(person.age) \(Text.ageWarnBody2)", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
     func popUpRates(person:Person) {
         
-        let asrPayRates = "After working \(person.yearsWorked) years your Percentage of Average Monthly Compensation would likely be \(Determine.monthlyCompensation(i:person.yearsWorked)).  Remember, more Service Credits = higher percentage paid. \n5 = 10.50%\n10 = 21.00%\n15 = 31.50%\n20 = 43.00%\n23 = 49.45%\n25 = 55.00%\n27 = 59.40%\n30 = 69.00%\n32 = 73.60%\n\n\(Determine.batchText(b: person.batch))"
+        let asrPayRates = "\(Text.ratesBody1)\(person.yearsWorked)\(Text.ratesBody2)\(Determine.monthlyCompensation(i:person.yearsWorked))\(Text.ratesBody3)\(Determine.batchText(b: person.batch))"
         
-        let alert = UIAlertController(title: "How Much?", message: asrPayRates, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: Text.howMuch, message: asrPayRates, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }

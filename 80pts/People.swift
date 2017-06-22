@@ -8,20 +8,20 @@
 
 import Foundation
 
-var list = [Person]()
+var ppl = [Person]()
 
 class People: NSObject, NSCoding {
     
     required init (coder aDecoder: NSCoder) {
         
         People.registerClassName()
-        list = aDecoder.decodeObject(forKey: "list") as! [Person]
+        ppl = aDecoder.decodeObject(forKey: Key.people) as! [Person]
     }
     
     func encode(with aCoder: NSCoder) {
         
         People.registerClassName()
-        aCoder.encode(list, forKey: "list")
+        aCoder.encode(ppl, forKey: Key.people)
     }
     
     enum ErrorType: Error {
@@ -34,16 +34,16 @@ class People: NSObject, NSCoding {
     
     static func add(thisPerson: Person) {
         
-        list.append(thisPerson)
+        ppl.append(thisPerson)
     }
     
     static func remove(thisPerson: Person) throws {
         
-        guard let i = list.index(where: {$0.name == thisPerson.name}) else {
+        guard let i = ppl.index(where: {$0.name == thisPerson.name}) else {
             throw ErrorType.personCannotBeFound
         }
         
-        list.remove(at: i)
+        ppl.remove(at: i)
         
     }
     
@@ -51,7 +51,7 @@ class People: NSObject, NSCoding {
         
         var answer = 0
         
-        for eachPerson in list {
+        for eachPerson in ppl {
             
             if sameString(a: eachPerson.name.charsOnly(), b: testString.charsOnly()) {
 

@@ -20,8 +20,8 @@ enum Batch : Int {
 
 struct BatchData {
     
-    static let firstBefore = dateFromArray(arr: [1,1,1984]) // if before 84
-    static let secondBefore = dateFromArray(arr: [6,30,2011]) // else if before 11
+    static let firstBefore = Dates.dateFromArray(arr: [1,1,1984]) // if before 84
+    static let secondBefore = Dates.dateFromArray(arr: [6,30,2011]) // else if before 11
     // else you are third batch
     
     static let firstText = "Since your start date was prior to January 1, 1984 your Average Monthly Compensation is calculated by taking the highest consecutive 60 months of contributions within the last 120 months of contributions reported to the ASRS, which could span more than 10 calendar years. Payments made as a result of termination of employment (Termination Pay) such as vacation/annual leave, sick leave, termination incentive payments, etc., are included in the calculation, with exceptions."
