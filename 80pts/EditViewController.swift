@@ -71,7 +71,7 @@ extension EditViewController: UITextFieldDelegate {
         
     }
     
-    func typingName(textField:UITextField){
+    @objc func typingName(textField:UITextField){
         
         if let typedText = textField.text {
             tempName = typedText

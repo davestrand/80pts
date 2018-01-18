@@ -26,6 +26,10 @@ class PeopleViewController: UIViewController{
         Person.registerClassName()
         loadPeople()
  
+        //NotificationCenter.default.addObserver(self, selector: #selector(self.orientationChanged(_:)), name: Notification.Name(rawValue: "orientationWillChange"), object: nil)
+
+        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,7 +109,7 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     }
     
     
-    func editAction (_ sender: UIButton) {
+    @objc func editAction (_ sender: UIButton) {
         Helper.setAsSelected(thisPerson: ppl[sender.tag])
         showEditScreen()
     }
@@ -262,7 +266,49 @@ extension PeopleViewController {
         alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-}
 
+    
+    //https://benincosa.com/?p=3280
+    
+//    func orientationChanged(notification: NSNotification ){
+//        print("Recieved notification of orientation change")
+//        UIDevice.current.orientation
+//        if let info = notification.userInfo as? Dictionary<String,NSNumber> {
+//            if let ori = info["orientation"] {
+//                print("orientation: \(ori)")
+//                let newOr : UIDeviceOrientation = UIDeviceOrientation(rawValue: ori.intValue)!
+//                rotateSubviewsForOrientation(orientation: newOr)
+//            }
+//        }
+//    }
+    
+    func rotateSubviewsForOrientation(orientation: UIDeviceOrientation) {
+        // rotate the subviews.
+        switch orientation {
+        case UIDeviceOrientation.landscapeLeft:
+            // home buitton facing right
+            subLabelTransform(f: CGFloat(Double.pi / 2))
+        case UIDeviceOrientation.landscapeRight:
+            // home button facing left
+            subLabelTransform(f: CGFloat(3 * Double.pi / 2))
+        default:
+            subLabelTransform(f: CGFloat(0))
+        }
+    }
+    
+    func subLabelTransform(f: CGFloat) {
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            //
+            //self.label1.transform = CGAffineTransformMakeRotation(f)
+            //self.label2.transform = CGAffineTransformMakeRotation(f)
+            //self.mainLabel.transform = CGAffineTransformMakeRotation(f)
+            
+        }) { (Bool) -> Void in
+            print("Done")
+        }
+        
+        
+    }
+}
 
 

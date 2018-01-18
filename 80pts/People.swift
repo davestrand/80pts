@@ -60,7 +60,7 @@ class People: NSObject, NSCoding {
                     answer = 2 //well then there's at least one other
                     
                     //now let's find what number to tack onto the end.
-                    if let lastChar = eachPerson.name.characters.last {
+                    if let lastChar = eachPerson.name.last {
                         if let lastNum = Int(String(lastChar)) {
                             if lastNum >= answer {
                                 answer = lastNum + 1

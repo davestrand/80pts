@@ -11,10 +11,6 @@ import UIKit
 
 extension String {
     
-    var length : Int {
-        return self.characters.count
-    }
-    
     func digitsOnly() -> String{
         let stringArray = self.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
         let newString = stringArray.joined(separator: "")
