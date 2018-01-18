@@ -20,6 +20,7 @@
 		F39258FC1EE739A40062BA03 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39258D81EE08C6B0062BA03 /* TodayViewController.swift */; };
 		F39258FE1EE770960062BA03 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39258FD1EE770960062BA03 /* People.swift */; };
 		F39259001EE87A100062BA03 /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39258FF1EE87A100062BA03 /* PeopleViewController.swift */; };
+		F3A451A42010F9410083BDA0 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39258FD1EE770960062BA03 /* People.swift */; };
 		F3D1A6BA1EE9B88700AAA633 /* PeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D1A6B91EE9B88700AAA633 /* PeopleCell.swift */; };
 		F3D1A6BC1EEA0A8900AAA633 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D1A6BB1EEA0A8900AAA633 /* Helpers.swift */; };
 		F3D1A6BF1EF87FC200AAA633 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D1A6BB1EEA0A8900AAA633 /* Helpers.swift */; };
@@ -163,16 +164,39 @@
 			path = 80ptsExtension;
 			sourceTree = "<group>";
 		};
+		F3A451A22010F9250083BDA0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F3D954BC1E0AFC4600D33A6F /* EditViewController.swift */,
+				F39258FF1EE87A100062BA03 /* PeopleViewController.swift */,
+				F3D1A6B91EE9B88700AAA633 /* PeopleCell.swift */,
+				F3D954BA1E0AFC4600D33A6F /* AppDelegate.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		F3A451A32010F92C0083BDA0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F39258F61EE72D0F0062BA03 /* Constants.swift */,
+				F3D1A6C01EFC636300AAA633 /* Wage.swift */,
+				F39258FD1EE770960062BA03 /* People.swift */,
+				F3F2F4A11E0C29ED00DC722F /* Person.swift */,
+				F3D1A6C31EFC766B00AAA633 /* SelectedPerson.swift */,
+				F3D1A6BB1EEA0A8900AAA633 /* Helpers.swift */,
+				F3F2F4A31E0C36A500DC722F /* Date.swift */,
+				F3F2F4A51E0C3D1300DC722F /* Rules.swift */,
+				F3D954E81E0AFC7700D33A6F /* Determine.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		F3D1A6C61EFC770900AAA633 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				F3D954BE1E0AFC4600D33A6F /* Main.storyboard */,
 				F3D954C31E0AFC4600D33A6F /* LaunchScreen.storyboard */,
-				F3D954BC1E0AFC4600D33A6F /* EditViewController.swift */,
-				F39258FF1EE87A100062BA03 /* PeopleViewController.swift */,
-				F3D1A6B91EE9B88700AAA633 /* PeopleCell.swift */,
-				F3D954BA1E0AFC4600D33A6F /* AppDelegate.swift */,
-				F3D954C61E0AFC4600D33A6F /* Info.plist */,
+				F3D954C11E0AFC4600D33A6F /* Assets.xcassets */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -203,18 +227,11 @@
 		F3D954B91E0AFC4600D33A6F /* 80pts */ = {
 			isa = PBXGroup;
 			children = (
-				F39258EA1EE60DB10062BA03 /* 80pts.entitlements */,
-				F3D954C11E0AFC4600D33A6F /* Assets.xcassets */,
+				F3A451A32010F92C0083BDA0 /* Model */,
 				F3D1A6C61EFC770900AAA633 /* View */,
-				F39258F61EE72D0F0062BA03 /* Constants.swift */,
-				F3D1A6C01EFC636300AAA633 /* Wage.swift */,
-				F39258FD1EE770960062BA03 /* People.swift */,
-				F3F2F4A11E0C29ED00DC722F /* Person.swift */,
-				F3D1A6C31EFC766B00AAA633 /* SelectedPerson.swift */,
-				F3D1A6BB1EEA0A8900AAA633 /* Helpers.swift */,
-				F3F2F4A31E0C36A500DC722F /* Date.swift */,
-				F3F2F4A51E0C3D1300DC722F /* Rules.swift */,
-				F3D954E81E0AFC7700D33A6F /* Determine.swift */,
+				F3A451A22010F9250083BDA0 /* Controller */,
+				F3D954C61E0AFC4600D33A6F /* Info.plist */,
+				F39258EA1EE60DB10062BA03 /* 80pts.entitlements */,
 			);
 			path = 80pts;
 			sourceTree = "<group>";
@@ -425,6 +442,7 @@
 				F3D1A6C21EFC652A00AAA633 /* Wage.swift in Sources */,
 				F3D1A6BF1EF87FC200AAA633 /* Helpers.swift in Sources */,
 				F39258E71EE096ED0062BA03 /* Rules.swift in Sources */,
+				F3A451A42010F9410083BDA0 /* People.swift in Sources */,
 				F39258FC1EE739A40062BA03 /* TodayViewController.swift in Sources */,
 				F39258E61EE096EA0062BA03 /* Date.swift in Sources */,
 				F39258E81EE096F10062BA03 /* Determine.swift in Sources */,
