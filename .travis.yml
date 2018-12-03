@@ -8,5 +8,3 @@ install:
 - export PATH="/Library/Developer/Toolchains/swift-4.2-DEVELOPMENT-SNAPSHOT-2018-05-30-a.xctoolchain/usr/bin:$PATH"
 script:
 - swift --version
-- swift package update
-- swift test
