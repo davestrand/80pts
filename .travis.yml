@@ -1,8 +1,2 @@
 os: osx
-osx_image: xcode10.1
 language: swift
-sudo: required
-script:
-- swift --version
-- swift package update
-- swift test
