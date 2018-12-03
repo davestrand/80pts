@@ -12,11 +12,11 @@ import Foundation
 struct Determine {
     
     static func ageWhenStarted(person:Person) -> Int {
-        var answer = 0
+        var age = 0
         let startDate = Dates.dateFromArray(arr: person.started)
         let bDate = Dates.dateFromArray(arr: person.birthday)
-        answer = Dates.yearDifference(from: bDate, to: startDate)
-        return answer
+        age = Dates.yearDifference(from: bDate, to: startDate)
+        return age
     }
     
     static func oldEnoughToWork(person:Person) -> Bool {

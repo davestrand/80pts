@@ -19,6 +19,7 @@ class PeopleViewController: UIViewController{
     var tempNameString = ""
     
     
+    
     @IBOutlet weak var pplView: UITableView!
     
     
