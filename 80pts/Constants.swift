@@ -12,8 +12,6 @@ import UIKit
 struct Defaults {
     
     static let group = UserDefaults(suiteName: "group.com.hobjoblin.80pts")
-
-    
 }
 
 
@@ -67,8 +65,6 @@ struct Key {
 
 struct Colors {
     //https://www.ralfebert.de/snippets/ios/swift-uicolor-picker/
-    
-    
     
     static let cellBackgroundNormal = UIColor(hue: 205/360, saturation: 100/100, brightness: 50/100, alpha: 1.0)
     static let cellBackgroundSelected = UIColor(hue: 205/360, saturation: 100/100, brightness: 80/100, alpha: 1.0)
