@@ -1,6 +1,6 @@
 version: "Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
 options: "26660b1030609da35c3223b154a19fc3"
-build_time: [1572213124, 898851000]
+build_time: [1572214624, 181707000]
 inputs:
   "/Users/davelevy/Desktop/80pts/80pts/80pts/EditViewController.swift": [9223372036, 854775807]
   "/Users/davelevy/Desktop/80pts/80pts/80pts/Wage.swift": [9223372036, 854775807]

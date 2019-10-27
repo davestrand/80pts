@@ -1,6 +1,6 @@
 version: "Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
 options: "c8b985ff4fbdbc58983e1b6e7c0c27dd"
-build_time: [1572213100, 780752000]
+build_time: [1572214600, 497893000]
 inputs:
   "/Users/davelevy/Desktop/80pts/80pts/80pts/Person.swift": [9223372036, 854775807]
   "/Users/davelevy/Desktop/80pts/80pts/80pts/Wage.swift": [9223372036, 854775807]

@@ -1,0 +1,14 @@
+version: "Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+options: "b32614818c8d3dca10c5835a70189aae"
+build_time: [1572215401, 795970000]
+inputs:
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Person.swift": [1572205357, 4242972]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Wage.swift": [1572205357, 5521683]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Helpers.swift": [1572206892, 320517621]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Rules.swift": [1572205357, 4807761]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/People.swift": [1572206945, 727630498]
+  "/Users/davelevy/Desktop/80pts/80pts/80ptsExtension/TodayViewController.swift": [1572207580, 325609863]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Date.swift": [1572205357, 1339646]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Determine.swift": [1572205357, 1695995]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Constants.swift": [1572205357, 1014828]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/SelectedPerson.swift": [1572205357, 5192390]
