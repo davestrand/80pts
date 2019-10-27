@@ -24,9 +24,11 @@ provides-dynamic-lookup:
 depends-top-level:
 - !private "*"
 - !private "+"
+- !private "+="
 - !private "/"
 - !private "<"
 - !private "=="
+- !private ">"
 - "AssignmentPrecedence"
 - "Bool"
 - !private "BooleanLiteralType"
@@ -39,11 +41,11 @@ depends-top-level:
 - !private "Dictionary"
 - !private "Double"
 - !private "EditViewController"
-- !private "FloatLiteralType"
+- "FloatLiteralType"
 - !private "Helper"
 - "IndexPath"
 - "Int"
-- !private "IntegerLiteralType"
+- "IntegerLiteralType"
 - !private "Key"
 - !private "NSKeyedUnarchiver"
 - !private "NSURL"
@@ -154,6 +156,7 @@ depends-member:
 - !private ["s7CVarArgP", "beginUpdates"]
 - !private ["s7CVarArgP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
 - !private ["s7CVarArgP", "count"]
+- !private ["s7CVarArgP", "countOfClicks"]
 - !private ["s7CVarArgP", "data"]
 - !private ["s7CVarArgP", "deleteRows"]
 - !private ["s7CVarArgP", "dequeueReusableCell"]
@@ -285,6 +288,7 @@ depends-member:
 - !private ["s28CustomDebugStringConvertibleP", "beginUpdates"]
 - !private ["s28CustomDebugStringConvertibleP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
 - !private ["s28CustomDebugStringConvertibleP", "count"]
+- !private ["s28CustomDebugStringConvertibleP", "countOfClicks"]
 - !private ["s28CustomDebugStringConvertibleP", "data"]
 - !private ["s28CustomDebugStringConvertibleP", "deleteRows"]
 - !private ["s28CustomDebugStringConvertibleP", "dequeueReusableCell"]
@@ -418,6 +422,7 @@ depends-member:
 - !private ["s23CustomStringConvertibleP", "beginUpdates"]
 - !private ["s23CustomStringConvertibleP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
 - !private ["s23CustomStringConvertibleP", "count"]
+- !private ["s23CustomStringConvertibleP", "countOfClicks"]
 - !private ["s23CustomStringConvertibleP", "data"]
 - !private ["s23CustomStringConvertibleP", "deleteRows"]
 - !private ["s23CustomStringConvertibleP", "dequeueReusableCell"]
@@ -578,6 +583,7 @@ depends-member:
 - !private ["SQ", "beginUpdates"]
 - !private ["SQ", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
 - !private ["SQ", "count"]
+- !private ["SQ", "countOfClicks"]
 - !private ["SQ", "data"]
 - !private ["SQ", "default"]
 - !private ["SQ", "delete"]
@@ -725,6 +731,7 @@ depends-member:
 - !private ["SH", "beginUpdates"]
 - !private ["SH", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
 - !private ["SH", "count"]
+- !private ["SH", "countOfClicks"]
 - !private ["SH", "data"]
 - !private ["SH", "default"]
 - !private ["SH", "delete"]
@@ -864,6 +871,7 @@ depends-member:
 - !private ["So8NSCodingP", "batch"]
 - !private ["So8NSCodingP", "beginUpdates"]
 - !private ["So8NSCodingP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So8NSCodingP", "countOfClicks"]
 - !private ["So8NSCodingP", "deleteRows"]
 - !private ["So8NSCodingP", "dequeueReusableCell"]
 - !private ["So8NSCodingP", "edit"]
@@ -956,6 +964,7 @@ depends-member:
 - !private ["So26NSExtensionRequestHandlingP", "addAction"]
 - !private ["So26NSExtensionRequestHandlingP", "assignSelectedName"]
 - !private ["So26NSExtensionRequestHandlingP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So26NSExtensionRequestHandlingP", "countOfClicks"]
 - !private ["So26NSExtensionRequestHandlingP", "editAction"]
 - !private ["So26NSExtensionRequestHandlingP", "finished"]
 - ["So26NSExtensionRequestHandlingP", "indexPathForPreferredFocusedView"]
@@ -1057,6 +1066,7 @@ depends-member:
 - !private ["So8NSObjectC", "batch"]
 - !private ["So8NSObjectC", "beginUpdates"]
 - !private ["So8NSObjectC", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- ["So8NSObjectC", "countOfClicks"]
 - !private ["So8NSObjectC", "data"]
 - !private ["So8NSObjectC", "deleteRows"]
 - !private ["So8NSObjectC", "dequeueReusableCell"]
@@ -1176,6 +1186,7 @@ depends-member:
 - !private ["So8NSObjectP", "batch"]
 - !private ["So8NSObjectP", "beginUpdates"]
 - !private ["So8NSObjectP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So8NSObjectP", "countOfClicks"]
 - !private ["So8NSObjectP", "data"]
 - !private ["So8NSObjectP", "deleteRows"]
 - !private ["So8NSObjectP", "dequeueReusableCell"]
@@ -1302,6 +1313,7 @@ depends-member:
 - !private ["5_0pts20PeopleViewControllerC", "Void"]
 - ["5_0pts20PeopleViewControllerC", "assignSelectedName"]
 - !private ["5_0pts20PeopleViewControllerC", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- ["5_0pts20PeopleViewControllerC", "countOfClicks"]
 - ["5_0pts20PeopleViewControllerC", "deinit"]
 - ["5_0pts20PeopleViewControllerC", "editAction"]
 - ["5_0pts20PeopleViewControllerC", "finished"]
@@ -1510,6 +1522,7 @@ depends-member:
 - !private ["So21UIAppearanceContainerP", "backgroundColor"]
 - !private ["So21UIAppearanceContainerP", "beginUpdates"]
 - !private ["So21UIAppearanceContainerP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So21UIAppearanceContainerP", "countOfClicks"]
 - !private ["So21UIAppearanceContainerP", "deleteRows"]
 - !private ["So21UIAppearanceContainerP", "dequeueReusableCell"]
 - !private ["So21UIAppearanceContainerP", "edit"]
@@ -1606,6 +1619,7 @@ depends-member:
 - !private ["So18UIContentContainerP", "addAction"]
 - !private ["So18UIContentContainerP", "assignSelectedName"]
 - !private ["So18UIContentContainerP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So18UIContentContainerP", "countOfClicks"]
 - !private ["So18UIContentContainerP", "editAction"]
 - !private ["So18UIContentContainerP", "finished"]
 - ["So18UIContentContainerP", "indexPathForPreferredFocusedView"]
@@ -1736,6 +1750,7 @@ depends-member:
 - !private ["So18UIFocusEnvironmentP", "backgroundColor"]
 - !private ["So18UIFocusEnvironmentP", "beginUpdates"]
 - !private ["So18UIFocusEnvironmentP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So18UIFocusEnvironmentP", "countOfClicks"]
 - !private ["So18UIFocusEnvironmentP", "deleteRows"]
 - !private ["So18UIFocusEnvironmentP", "dequeueReusableCell"]
 - !private ["So18UIFocusEnvironmentP", "edit"]
@@ -1900,6 +1915,7 @@ depends-member:
 - !private ["So30UIPasteConfigurationSupportingP", "backgroundColor"]
 - !private ["So30UIPasteConfigurationSupportingP", "beginUpdates"]
 - !private ["So30UIPasteConfigurationSupportingP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So30UIPasteConfigurationSupportingP", "countOfClicks"]
 - !private ["So30UIPasteConfigurationSupportingP", "deleteRows"]
 - !private ["So30UIPasteConfigurationSupportingP", "dequeueReusableCell"]
 - !private ["So30UIPasteConfigurationSupportingP", "edit"]
@@ -2007,6 +2023,7 @@ depends-member:
 - !private ["So11UIResponderC", "backgroundColor"]
 - !private ["So11UIResponderC", "beginUpdates"]
 - !private ["So11UIResponderC", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- ["So11UIResponderC", "countOfClicks"]
 - !private ["So11UIResponderC", "deleteRows"]
 - !private ["So11UIResponderC", "dequeueReusableCell"]
 - !private ["So11UIResponderC", "edit"]
@@ -2111,6 +2128,7 @@ depends-member:
 - !private ["So30UIResponderStandardEditActionsP", "backgroundColor"]
 - !private ["So30UIResponderStandardEditActionsP", "beginUpdates"]
 - !private ["So30UIResponderStandardEditActionsP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So30UIResponderStandardEditActionsP", "countOfClicks"]
 - !private ["So30UIResponderStandardEditActionsP", "deleteRows"]
 - !private ["So30UIResponderStandardEditActionsP", "dequeueReusableCell"]
 - !private ["So30UIResponderStandardEditActionsP", "edit"]
@@ -2202,6 +2220,7 @@ depends-member:
 - ["So20UIScrollViewDelegateP", ""]
 - !private ["So20UIScrollViewDelegateP", "assignSelectedName"]
 - !private ["So20UIScrollViewDelegateP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So20UIScrollViewDelegateP", "countOfClicks"]
 - !private ["So20UIScrollViewDelegateP", "editAction"]
 - !private ["So20UIScrollViewDelegateP", "finished"]
 - ["So20UIScrollViewDelegateP", "indexPathForPreferredFocusedView"]
@@ -2285,6 +2304,7 @@ depends-member:
 - !private ["So16UIStateRestoringP", "addAction"]
 - !private ["So16UIStateRestoringP", "assignSelectedName"]
 - !private ["So16UIStateRestoringP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So16UIStateRestoringP", "countOfClicks"]
 - !private ["So16UIStateRestoringP", "editAction"]
 - !private ["So16UIStateRestoringP", "finished"]
 - ["So16UIStateRestoringP", "indexPathForPreferredFocusedView"]
@@ -2373,6 +2393,7 @@ depends-member:
 - ["So21UITableViewDataSourceP", ""]
 - !private ["So21UITableViewDataSourceP", "assignSelectedName"]
 - !private ["So21UITableViewDataSourceP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So21UITableViewDataSourceP", "countOfClicks"]
 - !private ["So21UITableViewDataSourceP", "editAction"]
 - !private ["So21UITableViewDataSourceP", "finished"]
 - ["So21UITableViewDataSourceP", "indexPathForPreferredFocusedView"]
@@ -2442,6 +2463,7 @@ depends-member:
 - ["So19UITableViewDelegateP", ""]
 - !private ["So19UITableViewDelegateP", "assignSelectedName"]
 - !private ["So19UITableViewDelegateP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So19UITableViewDelegateP", "countOfClicks"]
 - !private ["So19UITableViewDelegateP", "editAction"]
 - !private ["So19UITableViewDelegateP", "finished"]
 - ["So19UITableViewDelegateP", "indexPathForPreferredFocusedView"]
@@ -2520,6 +2542,7 @@ depends-member:
 - !private ["So18UITraitEnvironmentP", "backgroundColor"]
 - !private ["So18UITraitEnvironmentP", "beginUpdates"]
 - !private ["So18UITraitEnvironmentP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So18UITraitEnvironmentP", "countOfClicks"]
 - !private ["So18UITraitEnvironmentP", "deleteRows"]
 - !private ["So18UITraitEnvironmentP", "dequeueReusableCell"]
 - !private ["So18UITraitEnvironmentP", "edit"]
@@ -2614,6 +2637,7 @@ depends-member:
 - !private ["So23UIUserActivityRestoringP", "backgroundColor"]
 - !private ["So23UIUserActivityRestoringP", "beginUpdates"]
 - !private ["So23UIUserActivityRestoringP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["So23UIUserActivityRestoringP", "countOfClicks"]
 - !private ["So23UIUserActivityRestoringP", "deleteRows"]
 - !private ["So23UIUserActivityRestoringP", "dequeueReusableCell"]
 - !private ["So23UIUserActivityRestoringP", "edit"]
@@ -2732,6 +2756,7 @@ depends-member:
 - !private ["So16UIViewControllerC", "addAction"]
 - ["So16UIViewControllerC", "assignSelectedName"]
 - !private ["So16UIViewControllerC", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- ["So16UIViewControllerC", "countOfClicks"]
 - ["So16UIViewControllerC", "editAction"]
 - ["So16UIViewControllerC", "finished"]
 - ["So16UIViewControllerC", "indexPathForPreferredFocusedView"]
@@ -2854,6 +2879,7 @@ depends-member:
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "batch"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "beginUpdates"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "countOfClicks"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "data"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "deleteRows"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "dequeueReusableCell"]
@@ -2965,6 +2991,7 @@ depends-member:
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "batch"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "beginUpdates"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "convertToUIApplicationOpenExternalURLOptionsKeyDictionary"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "countOfClicks"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "data"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "deleteRows"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "dequeueReusableCell"]
@@ -4416,4 +4443,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.1.sdk/System/Library/Frameworks/StoreKit.framework/Headers/StoreKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.1.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.1.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "330bf72e555d2750938fffe71ede97a4"
+interface-hash: "6c75a4a2dc923f065cd6a47b33d54b36"
