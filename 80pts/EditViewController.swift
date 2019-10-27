@@ -111,13 +111,21 @@ extension EditViewController: UITextFieldDelegate {
         startDayPicker.setDate( Dates.dateFromArray(arr: Selected.person.started), animated: true)
         startDayPicker.maximumDate = Dates.dateFromArray(arr: dateArray.today)
         
-        UIApplication.shared.statusBarStyle = .default
+        
+        
+        
+        
         
         view.backgroundColor = Colors.cellBackgroundNormal
 
     }
     
 
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .default
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

@@ -12,12 +12,12 @@
 
 
 import UIKit
-
+import StoreKit
 
 class PeopleViewController: UIViewController{
     
     var tempNameString = ""
-    
+    var countOfClicks = 0
     
     
     @IBOutlet weak var pplView: UITableView!
@@ -45,6 +45,11 @@ class PeopleViewController: UIViewController{
         
     }
     
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+     }
+    
     func refreshTable(){
         assignSelectedName()
         tempNameString = Selected.id
@@ -52,14 +57,32 @@ class PeopleViewController: UIViewController{
     }
     
     func assignSelectedName ()  {
-        if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let lastPersonChecked = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
+        
+        
+        guard let data =  Defaults.group?.data(forKey: Key.currentEmployee) else {
+              return
+          }
+          
+          if let lastPersonChecked = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Person {
+          
+        
+        
+        //if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let lastPersonChecked = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
             
             Helper.setAsSelected(thisPerson: lastPersonChecked)
         }
     }
     
     func loadPeople() {
-        if let data =  Defaults.group?.data(forKey: Key.people), let thesePeople = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Person] {
+        
+        guard let data =  Defaults.group?.data(forKey: Key.people) else {
+              return
+          }
+          
+          if let thesePeople = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Person] {
+          
+        
+        //if let data =  Defaults.group?.data(forKey: Key.people), let thesePeople = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Person] {
             ppl = thesePeople
         }
         pplView.reloadData()
@@ -76,7 +99,7 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as! PeopleCell
         
         //TODO: Maybe add some color to cell selections.. other than white/grey
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         if personExists(from:indexPath.row, in:ppl) {
             
@@ -94,7 +117,7 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
             
             cell.information.text = bodyText
             cell.edit.tag = indexPath.row
-            cell.edit.addTarget(self, action: #selector(PeopleViewController.editAction(_:)), for: UIControlEvents.touchUpInside)
+            cell.edit.addTarget(self, action: #selector(PeopleViewController.editAction(_:)), for: UIControl.Event.touchUpInside)
             cell.edit.isHidden = false
             cell.backgroundColor = Colors.cellBackgroundNormal
 
@@ -149,8 +172,8 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCell.EditingStyle.delete) {
             
             if personExists(from:indexPath.row, in:ppl) {
                 
@@ -180,18 +203,18 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
     
     
     func popWebpage(urlString:String) {
-        if let url = NSURL(string: urlString){ UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) }
+        if let url = NSURL(string: urlString){ UIApplication.shared.open(url as URL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil) }
     }
     
 
     
     
     func popBenefits() {
-        if let url = NSURL(string: Key.urlBenefits){ UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) }
+        if let url = NSURL(string: Key.urlBenefits){ UIApplication.shared.open(url as URL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil) }
     }
     
     func popEligibility() {
-        if let url = NSURL(string: Key.urlEligibility){ UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) }
+        if let url = NSURL(string: Key.urlEligibility){ UIApplication.shared.open(url as URL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil) }
     }
     
     @IBAction func popOfficialOptions(_ sender: Any) {
@@ -199,18 +222,18 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         
         let bodyText = Text.linksBody
         
-        let alert = UIAlertController(title: Text.linksTitle, message: bodyText, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: Text.linksTitle, message: bodyText, preferredStyle: UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction(title: Text.linkBenefits, style: UIAlertActionStyle.default) { action in
+        alert.addAction(UIAlertAction(title: Text.linkBenefits, style: UIAlertAction.Style.default) { action in
             self.popBenefits()
             
         })
-        alert.addAction(UIAlertAction(title: Text.linkEligibility, style: UIAlertActionStyle.default) { action in
+        alert.addAction(UIAlertAction(title: Text.linkEligibility, style: UIAlertAction.Style.default) { action in
             self.popEligibility()
             
         })
         
-        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
 
         
@@ -226,8 +249,8 @@ extension PeopleViewController :  UITableViewDelegate, UITableViewDataSource  {
         }
         
         
-        let alert = UIAlertController(title: Text.infoTitle + "\(version)", message: Text.infoBody, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: Text.infoTitle + "\(version)", message: Text.infoBody, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }
@@ -249,18 +272,33 @@ extension PeopleViewController {
         }
         
         
-        let alert = UIAlertController(title: titleText, message: bodyText, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: Text.howMuch, style: UIAlertActionStyle.default) { action in
+        let alert = UIAlertController(title: titleText, message: bodyText, preferredStyle: UIAlertController.Style.alert)
+        
+        
+        alert.addAction(UIAlertAction(title: Text.howMuch, style: UIAlertAction.Style.default) { action in
             self.popUpRates(person: person)
         })
-        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertActionStyle.default, handler: nil))
+       
+        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertAction.Style.default) { action in
+                 self.finished()
+             })
+                
         self.present(alert, animated: true, completion: nil)
         
     }
     
+    
+    func finished(){
+        countOfClicks += 1
+        
+        if countOfClicks > 1 {
+            SKStoreReviewController.requestReview()
+        }
+    }
+    
     func showAgeWarning(person:Person) {
-        let alert = UIAlertController(title: Text.ageWarnTitle, message: "\(Text.ageWarnBody1) \(person.age) \(Text.ageWarnBody2)", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: Text.ageWarnTitle, message: "\(Text.ageWarnBody1) \(person.age) \(Text.ageWarnBody2)", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -268,8 +306,8 @@ extension PeopleViewController {
         
         let asrPayRates = "\(Text.ratesBody1)\(person.yearsWorked)\(Text.ratesBody2)\(Determine.monthlyCompensation(i:person.yearsWorked))\(Text.ratesBody3)\(Determine.batchText(b: person.batch))"
         
-        let alert = UIAlertController(title: Text.howMuch, message: asrPayRates, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: Text.howMuch, message: asrPayRates, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: Text.ok, style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 
@@ -318,3 +356,8 @@ extension PeopleViewController {
 }
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}

@@ -39,7 +39,7 @@ class People: NSObject, NSCoding {
     
     static func remove(thisPerson: Person) throws {
         
-        guard let i = ppl.index(where: {$0.name == thisPerson.name}) else {
+        guard let i = ppl.firstIndex(where: {$0.name == thisPerson.name}) else {
             throw ErrorType.personCannotBeFound
         }
         
@@ -90,7 +90,10 @@ class People: NSObject, NSCoding {
     
     static func persist (ppl:[Person]) {
         
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: ppl)
+        //let encodedData = NSKeyedArchiver.archivedData(withRootObject: ppl)
+        
+        let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: ppl, requiringSecureCoding: false)
+
         
         if let defaultGroup = Defaults.group {
             defaultGroup.set(encodedData, forKey: Key.people)

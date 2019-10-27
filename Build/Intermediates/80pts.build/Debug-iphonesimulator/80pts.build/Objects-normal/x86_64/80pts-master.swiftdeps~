@@ -1,0 +1,18 @@
+version: "Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+options: "b1962d255cd7a0ffd74f599b5745c4e9"
+build_time: [1572209361, 388080000]
+inputs:
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/EditViewController.swift": [1572207755, 498924494]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Wage.swift": [1572205357, 5521683]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/SelectedPerson.swift": [1572205357, 5192390]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Date.swift": [1572205357, 1339646]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleCell.swift": [1572205357, 3404727]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Determine.swift": [1572205357, 1695995]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Helpers.swift": [1572206892, 320517621]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Person.swift": [1572205357, 4242972]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/People.swift": [1572206945, 727630498]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift": [1572209360, 915265870]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/ReviewControlller.swift": [1572209146, 797776186]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/AppDelegate.swift": [1572205484, 2370533]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Rules.swift": [1572205357, 4807761]
+  "/Users/davelevy/Desktop/80pts/80pts/80pts/Constants.swift": [1572205357, 1014828]

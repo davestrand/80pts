@@ -36,7 +36,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         titleLabel?.text = titleText
         bodyLabel?.text = bodyText
         
-        if let data =  Defaults.group?.data(forKey: Key.currentEmployee), let lastPersonChecked = NSKeyedUnarchiver.unarchiveObject(with: data) as? Person {
+        guard let data =  Defaults.group?.data(forKey: Key.currentEmployee) else {
+            return
+        }
+        
+        if let lastPersonChecked = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Person {
+        
             
             Helper.setAsSelected(thisPerson: lastPersonChecked)
             

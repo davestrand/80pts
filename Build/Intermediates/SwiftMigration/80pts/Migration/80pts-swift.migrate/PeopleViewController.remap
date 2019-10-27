@@ -1,0 +1,128 @@
+[
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 2257,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 3061,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 3065,
+    "remove": 2,
+    "text": "t"
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 5065,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 5155,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 6143,
+    "text": "convertToUIApplicationOpenExternalURLOptionsKeyDictionary("
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 6146,
+    "text": ")"
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 6321,
+    "text": "convertToUIApplicationOpenExternalURLOptionsKeyDictionary("
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 6324,
+    "text": ")"
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 6494,
+    "text": "convertToUIApplicationOpenExternalURLOptionsKeyDictionary("
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 6497,
+    "text": ")"
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 6770,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 6876,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 7045,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 7213,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 7696,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 7783,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 8473,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 8565,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 8721,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 9038,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 9125,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 9593,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 9680,
+    "text": "."
+  },
+  {
+    "file": "/Users/davelevy/Desktop/80pts/80pts/80pts/PeopleViewController.swift",
+    "offset": 11332,
+    "text": "\n// Helper function inserted by Swift 4.2 migrator.\nfileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {\n\treturn Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})\n}\n"
+  }
+]

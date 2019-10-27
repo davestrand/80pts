@@ -47,7 +47,17 @@ struct Helper {
     
     static func persistSelectedEmployee (person:Person ) {
         //https://grokswift.com/notification-center-widget/
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: person)
+         
+        //OLDWAY
+        //let encodedData = NSKeyedArchiver.archivedData(withRootObject: person)
+        
+        //NEW WAY
+        let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: person, requiringSecureCoding: false)
+
+        
+        
+        
+        
         if let defaultGroup = Defaults.group {
             defaultGroup.set(encodedData, forKey: Key.currentEmployee)
             defaultGroup.synchronize()
