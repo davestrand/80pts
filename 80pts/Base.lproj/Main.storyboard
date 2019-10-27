@@ -283,7 +283,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="nhv-T9-1cM" secondAttribute="trailing" constant="83" id="zSH-u3-5nX"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.18405195990000001" green="0.29286798289999999" blue="0.57659932660000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.18431372549019609" green="0.29286798289999999" blue="0.57659932660000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="edit" destination="qqf-Th-cKn" id="PQY-tL-PdM"/>
                                             <outlet property="information" destination="nhv-T9-1cM" id="pqw-SQ-hw2"/>
@@ -300,6 +300,7 @@
                                 <rect key="frame" x="466" y="4" width="82" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="LrD-hi-dhZ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="82" id="YMd-3y-RNi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MalayalamSangamMN" family="Malayalam Sangam MN" pointSize="17"/>
                                 <state key="normal" title="Official Site">
@@ -313,6 +314,7 @@
                                 <rect key="frame" x="20" y="8" width="25" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="NgQ-L6-Y5P"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="q2d-Tb-ZW4"/>
                                 </constraints>
                                 <connections>
                                     <action selector="popInfo:" destination="n5H-SP-ZHX" eventType="touchUpInside" id="1zX-j8-h6d"/>
