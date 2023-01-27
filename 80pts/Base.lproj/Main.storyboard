@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5Fv-Ld-sJD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5Fv-Ld-sJD">
     <device id="retina4_0" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -39,7 +39,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dan-7g-vqI">
-                                <rect key="frame" x="14" y="105" width="540" height="180"/>
+                                <rect key="frame" x="14" y="105" width="540" height="66.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <date key="date" timeIntervalSinceReferenceDate="-63092823.326004028">
@@ -53,7 +53,7 @@
                                 </connections>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Employee's Start Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbC-LX-iqg">
-                                <rect key="frame" x="14" y="290" width="534" height="18"/>
+                                <rect key="frame" x="14" y="176.5" width="534" height="18"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="TXg-dv-tYp"/>
@@ -63,12 +63,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="rA8-bs-wUc">
-                                <rect key="frame" x="14" y="308" width="540" height="160"/>
+                                <rect key="frame" x="14" y="194.5" width="540" height="46.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="uuk-IW-sp4"/>
-                                </constraints>
                                 <connections>
                                     <action selector="stDayAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="ioE-US-6Rg"/>
                                 </connections>
@@ -89,7 +86,7 @@
                                     <action selector="wagesAdjusted:" destination="BYZ-38-t0r" eventType="valueChanged" id="pg1-ys-sTN"/>
                                 </connections>
                             </stepper>
-                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLh-Wt-whL">
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLh-Wt-whL">
                                 <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -125,7 +122,7 @@
                             <constraint firstItem="QMC-Xl-J2g" firstAttribute="leading" secondItem="U0Q-pW-0OU" secondAttribute="leading" id="QYF-XB-WQK"/>
                             <constraint firstItem="iLh-Wt-whL" firstAttribute="centerX" secondItem="rA8-bs-wUc" secondAttribute="centerX" id="RbL-tc-jEz"/>
                             <constraint firstItem="UBT-Bk-y6o" firstAttribute="leading" secondItem="iLh-Wt-whL" secondAttribute="trailing" id="Tuk-Gy-elJ"/>
-                            <constraint firstItem="oVw-Zf-Glh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" symbolic="YES" id="VlS-5V-wcQ"/>
+                            <constraint firstItem="oVw-Zf-Glh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="VlS-5V-wcQ"/>
                             <constraint firstItem="iLh-Wt-whL" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Zkd-Ag-oSY"/>
                             <constraint firstItem="rA8-bs-wUc" firstAttribute="top" secondItem="lbC-LX-iqg" secondAttribute="bottom" id="aNW-zz-Zgr"/>
                             <constraint firstItem="lbC-LX-iqg" firstAttribute="top" secondItem="dan-7g-vqI" secondAttribute="bottom" constant="5" id="b5O-2R-oZC"/>
@@ -137,7 +134,7 @@
                             <constraint firstItem="oVw-Zf-Glh" firstAttribute="trailing" secondItem="WIo-hh-LLy" secondAttribute="trailing" id="gBC-cT-PEw"/>
                             <constraint firstAttribute="trailing" secondItem="UBT-Bk-y6o" secondAttribute="trailing" id="qg1-h9-SLO"/>
                             <constraint firstItem="iLh-Wt-whL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rX3-vV-ANI"/>
-                            <constraint firstItem="rA8-bs-wUc" firstAttribute="height" secondItem="dan-7g-vqI" secondAttribute="height" constant="-20" id="sYr-dw-1dw"/>
+                            <constraint firstItem="rA8-bs-wUc" firstAttribute="height" secondItem="dan-7g-vqI" secondAttribute="height" priority="750" constant="-20" id="sYr-dw-1dw"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -220,12 +217,12 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kxE-U3-33h">
                                 <rect key="frame" x="0.0" y="39" width="568" height="281"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" systemColor="darkTextColor"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="810-Yu-qRz" customClass="PeopleCell" customModule="_0pts" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="568" height="70"/>
+                                        <rect key="frame" x="0.0" y="50" width="568" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="810-Yu-qRz" id="1Dh-2H-iaf">
                                             <rect key="frame" x="0.0" y="0.0" width="568" height="70"/>
@@ -258,7 +255,7 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqf-Th-cKn">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqf-Th-cKn">
                                                     <rect key="frame" x="493" y="5" width="60" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="reJ-Pf-W47"/>
@@ -296,7 +293,7 @@
                                     <outlet property="delegate" destination="n5H-SP-ZHX" id="DDM-mw-FyO"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilx-d7-Euo">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilx-d7-Euo">
                                 <rect key="frame" x="466" y="4" width="82" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="LrD-hi-dhZ"/>
@@ -348,4 +345,9 @@
             <point key="canvasLocation" x="-1047.8873239436621" y="-873.75"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
