@@ -40,7 +40,7 @@ extension EditViewController: UITextFieldDelegate {
 
         nameField.addTarget(self, action: #selector(typingName), for: .editingChanged)
         
-        beautitfy()
+        //beautitfy()
     }
     
     
